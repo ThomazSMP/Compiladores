@@ -28,7 +28,7 @@ Ficam **fora** do escopo inicial: funções, classes, laços, listas, strings, i
 ## 2. Arquitetura
 
 ```
-software-educacional/
+Compiladores/
 ├── backend/            # API em Python (FastAPI)
 │   ├── app/main.py
 │   ├── requirements.txt
@@ -62,8 +62,8 @@ docker compose version
 ## 4. Como executar
 
 ```bash
-git clone <URL-DO-REPOSITORIO>
-cd software-educacional
+git clone https://github.com/ThomazSMP/Compiladores.git
+cd Compiladores
 docker compose up --build
 ```
 
@@ -100,7 +100,7 @@ Roteiro para simular uma máquina que nunca viu o projeto:
 
 ```bash
 # 1. Clonar em uma pasta nova
-git clone <URL-DO-REPOSITORIO> /tmp/teste-limpo && cd /tmp/teste-limpo
+git clone https://github.com/ThomazSMP/Compiladores.git /tmp/teste-limpo && cd /tmp/teste-limpo
 
 # 2. Garantir que não há resíduos de execuções anteriores
 docker compose down --rmi local -v
@@ -122,8 +122,7 @@ Registro da validação (preencher após executar):
 
 | Data | Sistema operacional | Versão do Docker | Resultado |
 |---|---|---|---|
-| __/__/____ | | | |
-
+| 12/10/2026 | macOS (MacBook Air) | VERSÃO 4.95.0 | Funcionou: build sem cache concluído, `edu-backend` saudável e `edu-frontend` no ar, `curl http://localhost:8080/api/hello` retornou `{"message":"Hello, World!"}` |
 ## 7. Solução de problemas
 
 - **Porta 8080 ocupada:** altere o mapeamento em `docker-compose.yml` (`"8081:80"`) e acesse a nova porta.
