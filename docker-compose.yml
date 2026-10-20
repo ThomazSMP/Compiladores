@@ -1,6 +1,8 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: runtime
     container_name: edu-backend
     expose:
       - "8000"
@@ -18,3 +20,18 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+
+  # ---- Testes automatizados (só rodam quando pedidos explicitamente) ----
+  backend-tests:
+    build:
+      context: ./backend
+      target: test
+    profiles: ["test"]
+
+  frontend-tests:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./frontend:/app:ro
+    command: ["node", "--test", "tests/*.test.js"]
+    profiles: ["test"]

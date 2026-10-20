@@ -3,33 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Software Educacional</title>
-  <style>
-    body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; background: #f5f7fa; color: #1d2733; }
-    main { text-align: center; }
-    h1 { font-size: 2.5rem; margin-bottom: .25rem; }
-    #status { color: #5b6b7b; }
-    #status.erro { color: #b3261e; }
-  </style>
+  <title>Software Educacional de Análise de Código</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1 id="mensagem">Carregando...</h1>
-    <p id="status">Consultando o backend...</p>
+  <header class="topo">
+    <h1 id="nome-sistema">Software Educacional de Análise de Código</h1>
+    <p id="linguagem" class="selo">Linguagem analisada: <strong>Python</strong> (subconjunto)</p>
+  </header>
+
+  <main class="layout">
+    <section class="painel" aria-labelledby="titulo-entrada">
+      <h2 id="titulo-entrada">1. Código-fonte</h2>
+
+      <div class="campo">
+        <label for="exemplos">Carregar um exemplo</label>
+        <select id="exemplos" disabled>
+          <option value="">Carregando exemplos…</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="codigo">Escreva, cole ou edite o programa</label>
+        <textarea id="codigo" rows="14" spellcheck="false" autocomplete="off" autocapitalize="off"
+                  placeholder="Digite um programa em Python (subconjunto)…">x = 10</textarea>
+      </div>
+
+      <button id="btn-analisar" type="button">Analisar código</button>
+      <p class="dica">Atalho: Ctrl + Enter (⌘ + Enter no Mac)</p>
+    </section>
+
+    <section class="painel" aria-labelledby="titulo-resultados">
+      <h2 id="titulo-resultados">2. Resultados</h2>
+      <div id="resultados" class="resultados resultados--info" role="status" aria-live="polite">
+        <p>Informe ou selecione um código e clique em <strong>Analisar código</strong>. As análises
+           léxica, sintática e semântica serão exibidas aqui nas próximas etapas.</p>
+      </div>
+    </section>
   </main>
-  <script>
-    fetch("/api/hello")
-      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-      .then(d => {
-        document.getElementById("mensagem").textContent = d.message;
-        document.getElementById("status").textContent = "Resposta recebida do backend.";
-      })
-      .catch(e => {
-        document.getElementById("mensagem").textContent = "Erro";
-        const s = document.getElementById("status");
-        s.textContent = "Não foi possível falar com o backend (" + e.message + ").";
-        s.className = "erro";
-      });
-  </script>
+
+  <noscript><p class="aviso-js">Este software precisa de JavaScript habilitado para funcionar.</p></noscript>
+
+  <script src="js/logica.js"></script>
+  <script src="js/controlador.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+:root {
+  --fundo: #f4f6f9; --painel: #ffffff; --texto: #1d2733; --suave: #5b6b7b;
+  --borda: #cfd7e1; --destaque: #1f5fbf; --destaque-escuro: #174a96;
+  --ok-fundo: #e6f4ea; --ok-borda: #2e7d32;
+  --erro-fundo: #fdecea; --erro-borda: #c62828;
+  --aviso-fundo: #fff4e0; --aviso-borda: #ef8f00;
+  --info-fundo: #eaf1fb; --info-borda: #1f5fbf;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
+.topo { padding: 1.25rem 1.5rem; background: var(--painel); border-bottom: 1px solid var(--borda); }
+.topo h1 { margin: 0 0 .35rem; font-size: 1.5rem; }
+.selo { margin: 0; display: inline-block; padding: .15rem .7rem; border-radius: 999px;
+        background: var(--info-fundo); border: 1px solid var(--info-borda); font-size: .9rem; }
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 1200px;
+          margin: 1.25rem auto; padding: 0 1.5rem; }
+@media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+.painel { background: var(--painel); border: 1px solid var(--borda); border-radius: 10px; padding: 1.1rem 1.25rem; }
+.painel h2 { margin: 0 0 .9rem; font-size: 1.1rem; }
+.campo { margin-bottom: .9rem; }
+label { display: block; margin-bottom: .3rem; font-weight: 600; font-size: .92rem; }
+select, textarea { width: 100%; border: 1px solid var(--borda); border-radius: 6px; padding: .55rem .7rem;
+                   font-size: 1rem; background: #fff; color: var(--texto); }
+textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+           font-size: .95rem; line-height: 1.45; min-height: 260px; resize: vertical; tab-size: 4; white-space: pre; overflow: auto; }
+select:focus, textarea:focus, button:focus-visible { outline: 3px solid #9ec1f5; outline-offset: 1px; }
+button { background: var(--destaque); color: #fff; border: 0; border-radius: 6px; padding: .65rem 1.3rem;
+         font-size: 1rem; font-weight: 600; cursor: pointer; }
+button:hover:not(:disabled) { background: var(--destaque-escuro); }
+button:disabled { opacity: .6; cursor: wait; }
+.dica { margin: .5rem 0 0; font-size: .82rem; color: var(--suave); }
+.resultados { border-left: 5px solid var(--info-borda); background: var(--info-fundo); border-radius: 6px; padding: .8rem 1rem; }
+.resultados p { margin: 0 0 .4rem; }
+.resultados p:last-child { margin-bottom: 0; }
+.resultados--sucesso { border-color: var(--ok-borda); background: var(--ok-fundo); }
+.resultados--erro_entrada, .resultados--erro_servidor, .resultados--erro_comunicacao
+  { border-color: var(--erro-borda); background: var(--erro-fundo); }
+.resultados--aviso { border-color: var(--aviso-borda); background: var(--aviso-fundo); }
+.detalhes { font-size: .9rem; color: var(--suave); }
+.aviso-js { max-width: 1200px; margin: 1rem auto; padding: 0 1.5rem; color: var(--erro-borda); }
