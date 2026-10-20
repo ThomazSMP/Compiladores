@@ -249,9 +249,8 @@ docker compose down
 **Registro das validações** (preencher após executar):
 
 | Etapa | Data | Sistema operacional | Versão do Docker | Resultado |
-|---|---|---|---|---|
-| 1 | DD/MM/AAAA | macOS | X.Y.Z | Build sem cache concluído, `edu-backend` saudável e `edu-frontend` no ar; `curl http://localhost:8080/api/hello` retornou `{"message":"Hello, World!"}` |
-| 2 | DD/MM/AAAA | | | |
+| 1 | 11/10/2026 | macOS | X.Y.Z | Build sem cache concluído, `edu-backend` saudável e `edu-frontend` no ar; `curl http://localhost:8080/api/hello` retornou `{"message":"Hello, World!"}` |
+| 2 | 20/10/2026 | macOS | X.Y.Z | `bash scripts/testar.sh`: backend 45 aprovados e frontend 44 aprovados; `bash scripts/smoke_test.sh`: 9 de 9 aprovadas; interface acessada em `http://localhost:8080` |
 
 ## 13. Solução de problemas
 
