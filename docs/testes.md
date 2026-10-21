@@ -25,6 +25,10 @@ Ambiente: macOS (MacBook Air), Docker Compose. Imagens: `python:3.12-slim` (Pyth
 
 O aviso do pytest é um `DeprecationWarning` interno da biblioteca Starlette (alias do `anyio`) e não afeta o resultado.
 
+### Validação de instalação limpa
+
+Validação de instalação limpa realizada em 20/10/2026, no macOS, com Docker 29.9.1. As imagens foram reconstruídas sem cache e a aplicação iniciou corretamente. Smoke test: 9 verificações aprovadas, 0 falhas. Backend: 45 testes aprovados, 0 falhas e 1 aviso de descontinuação de dependência. Frontend: 44 testes aprovados, 0 falhas.
+
 ### Falhas encontradas durante o desenvolvimento e correções
 
 - O comando `node --test tests/` falhou no Node 22 (trata o diretório como arquivo). Foi corrigido para `node --test "tests/*.test.js"`, também no `docker-compose.yml`.
@@ -32,6 +36,5 @@ O aviso do pytest é um `DeprecationWarning` interno da biblioteca Starlette (al
 
 ### Pendências e limitações
 
-- Validação de instalação limpa da etapa 2 (seção 12 do README), com `docker compose build --no-cache`.
 - Não há teste automatizado em navegador real dentro do repositório. A tela foi verificada manualmente.
 - Os testes de interface verificam a estrutura do HTML/CSS e o comportamento do controlador com dublês; o DOM em si é verificado manualmente.
