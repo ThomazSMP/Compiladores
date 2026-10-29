@@ -45,6 +45,7 @@
           "detalhes"
         ));
       }
+      window.Resultados.mostrar(document, area, resultado);
     },
   };
 

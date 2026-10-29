@@ -39,3 +39,19 @@ button:disabled { opacity: .6; cursor: wait; }
 .resultados--aviso { border-color: var(--aviso-borda); background: var(--aviso-fundo); }
 .detalhes { font-size: .9rem; color: var(--suave); }
 .aviso-js { max-width: 1200px; margin: 1rem auto; padding: 0 1.5rem; color: var(--erro-borda); }
+.layout > *, .painel { min-width: 0; }
+.resultados--erro_lexico { border-color: var(--erro-borda); background: var(--erro-fundo); }
+.resultados h3 { margin: 1rem 0 .4rem; font-size: 1rem; }
+.explicacao, .contagens { font-size: .85rem; overflow-wrap: anywhere; }
+.tabela-rolagem { overflow: auto; max-height: 440px; margin-top: .8rem; background: white; }
+.tabela-tokens { border-collapse: collapse; width: 100%; font-size: .8rem; }
+.tabela-tokens caption { text-align: left; padding: .5rem; color: var(--suave); }
+.tabela-tokens th, .tabela-tokens td { padding: .5rem; border: 1px solid var(--borda); text-align: left; }
+.tabela-tokens th { background: var(--info-fundo); position: sticky; top: 0; }
+.tabela-tokens td:nth-child(2) { font-family: monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.token-ativo { background: #fff1c7; box-shadow: inset 4px 0 #9a6100; }
+.passos { display: flex; gap: .5rem; flex-wrap: wrap; margin: .6rem 0; }
+.passos button { min-height: 44px; padding: .45rem .85rem; }
+.passo-atual { font-size: .85rem; overflow-wrap: anywhere; }
+.erros-lexicos { padding-left: 1.25rem; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .layout { padding: 0 .6rem; gap: .7rem; } .painel { padding: .8rem; } .topo { padding: 1rem; } }

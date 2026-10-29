@@ -2,6 +2,12 @@
 
 EXEMPLOS = [
     {
+        "id": "erros-lexicos",
+        "titulo": "Erros léxicos com recuperação",
+        "descricao": "O scanner informa os caracteres inválidos e continua reconhecendo os tokens seguintes.",
+        "codigo": "x = 10 @\ny = 12abc\nresultado = x + 2 $\n",
+    },
+    {
         "id": "atribuicao",
         "titulo": "Atribuição de variáveis",
         "descricao": "Declaração implícita de variáveis com literais inteiros e de ponto flutuante.",

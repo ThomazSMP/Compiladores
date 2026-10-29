@@ -1,9 +1,10 @@
+name: compiladores-etapa3
+
 services:
   backend:
     build:
       context: ./backend
       target: runtime
-    container_name: edu-backend
     expose:
       - "8000"
     healthcheck:
@@ -14,9 +15,8 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: edu-frontend
     ports:
-      - "8080:80"
+      - "${PORTA_WEB:-8080}:80"
     depends_on:
       backend:
         condition: service_healthy

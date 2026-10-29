@@ -1,7 +1,6 @@
 """API do software educacional.
 
-Etapa 2: recebe o código-fonte, valida a entrada e devolve uma resposta estruturada.
-As análises léxica, sintática e semântica serão acrescentadas nas próximas etapas.
+Etapa 3: valida a entrada e executa o scanner. Parser e semântica são futuros.
 """
 import logging
 
@@ -10,7 +9,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, StrictStr
 
-from . import exemplos, validacao
+from . import exemplos, validacao, scanner
 
 logger = logging.getLogger("app")
 
@@ -65,4 +64,5 @@ def analisar(requisicao: RequisicaoAnalise):
         "recebido": True,
         "mensagem": validacao.MSG_SUCESSO,
         "resumo": validacao.resumir(requisicao.codigo),
+        **scanner.analisar(requisicao.codigo),
     }

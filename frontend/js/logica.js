@@ -44,9 +44,12 @@
 
     if (status >= 200 && status < 300 && ehObjeto && corpo.recebido === true) {
       return {
-        tipo: "sucesso",
-        mensagem: typeof corpo.mensagem === "string" ? corpo.mensagem : "Código recebido com sucesso.",
+        tipo: corpo.sucesso === false ? "erro_lexico" : "sucesso",
+        mensagem: typeof corpo.mensagem === "string" ? corpo.mensagem :
+          (corpo.sucesso === false ? "Foram encontrados erros léxicos. Confira as mensagens e os tokens reconhecidos." : "Código recebido com sucesso."),
         detalhes: ehObjeto && corpo.resumo && typeof corpo.resumo === "object" ? corpo.resumo : null,
+        tokens: Array.isArray(corpo.tokens) ? corpo.tokens : null,
+        erros: Array.isArray(corpo.erros) ? corpo.erros : [],
       };
     }
     if (temErro && status >= 400 && status < 500) {

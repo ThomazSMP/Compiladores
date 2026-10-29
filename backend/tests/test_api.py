@@ -40,11 +40,15 @@ def test_codigo_valido_retorna_200_e_resumo():
     resposta = analisar({"codigo": "x = 10"})
     assert resposta.status_code == 200
     assert resposta.headers["content-type"].startswith("application/json")
-    assert resposta.json() == {
+    corpo = resposta.json()
+    assert {k: corpo[k] for k in ("recebido", "mensagem", "resumo")} == {
         "recebido": True,
         "mensagem": "Código recebido com sucesso.",
         "resumo": {"linhas": 1, "caracteres": 6},
     }
+    assert corpo["sucesso"] is True
+    assert corpo["erros"] == []
+    assert corpo["tokens"][0] == {"tipo": "IDENTIFICADOR", "lexema": "x", "linha": 1, "coluna": 1}
 
 
 def test_codigo_com_varias_linhas_e_indentacao():
@@ -64,6 +68,23 @@ def test_codigo_com_erro_de_sintaxe_e_recebido_normalmente():
     resposta = analisar({"codigo": "x = = 5 +"})
     assert resposta.status_code == 200
     assert resposta.json()["recebido"] is True
+    assert resposta.json()["sucesso"] is True
+
+
+def test_erro_lexico_retorna_200_com_sucesso_false_e_recuperacao():
+    resposta = analisar({"codigo": "x = @ 2\ny=3 $"})
+    assert resposta.status_code == 200
+    corpo = resposta.json()
+    assert corpo["recebido"] is True
+    assert corpo["sucesso"] is False
+    assert len(corpo["erros"]) == 2
+    assert corpo["erros"][0]["linha"] == 1
+    assert corpo["erros"][0]["coluna"] == 5
+    assert any(t["lexema"] == "3" for t in corpo["tokens"])
+    for token in corpo["tokens"]:
+        assert set(token) == {"tipo", "lexema", "linha", "coluna"}
+    for erro in corpo["erros"]:
+        assert set(erro) == {"tipo", "lexema", "linha", "coluna", "mensagem"}
 
 
 def test_campos_extras_sao_ignorados():
