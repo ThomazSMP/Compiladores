@@ -27,6 +27,8 @@ services:
       context: ./backend
       target: test
     profiles: ["test"]
+    volumes:
+      - ./docs:/code/docs:ro
 
   frontend-tests:
     image: node:22-alpine

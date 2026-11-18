@@ -1,0 +1,14 @@
+{
+  "versao": "1.0",
+  "congelado_em_utc": "2026-11-18T18:35:05.242660+00:00",
+  "commit_base": "5d9d81acfff427d07e4f2229a9a363948a737835",
+  "nenhum_teste_novo_executado_antes_deste_registro": true,
+  "arquivos": {
+    "docs/etapa4/gramatica.ebnf": "4c38a5e6dc1af92875d92d646d2b0057a6f688a8c637e0fd8d00e9e587bbe31f",
+    "docs/etapa4/casos-de-teste.json": "ccf2bc804982204c55c39dafc8828d5e6c070cc04b6a42950c424a917ddf5a4f",
+    "docs/etapa4/casos-de-teste.md": "9a38a88d51deeee088b66c464426632573d0afbc09155d584a5b538b51fe1f49",
+    "docs/etapa4/protocolo-avaliacao.md": "af465400a9a35c5496d0ac690263250c4e2c7971ea94984205329baca56938fb",
+    "docs/etapa4/formulario-pares.md": "b775abe7688777c362086d761c008bb2a103f9bdc7a4d18d66c69b0cb8206188",
+    "backend/tests/test_planejamento_etapa4.py": "fbd66813bf132b2c62a31e063967df833d9929f8bc65ebd7c2a1ac936dcb4646"
+  }
+}

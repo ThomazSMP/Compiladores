@@ -1,0 +1,497 @@
+{
+  "criterios": [
+    "Web",
+    "Entrada de código",
+    "Exemplos de código",
+    "Análise léxica",
+    "Análise sintática",
+    "AST exibida",
+    "Árvore de derivação",
+    "Verificações semânticas",
+    "Tabela de símbolos",
+    "Código gerado exibido",
+    "Passo a passo",
+    "Diagnósticos",
+    "Explicações didáticas",
+    "Avaliação com estudantes",
+    "Resultados de aprendizagem"
+  ],
+  "estudos": [
+    {
+      "id": "G",
+      "label": "Graciano Junior et al. (2022)",
+      "name": "Ferramenta interativa",
+      "old": true,
+      "vals": [
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "✗",
+        "NI",
+        "✗",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✗"
+      ],
+      "profile": [
+        "Ferramenta didática; web responsiva; Angular/Python.",
+        "Pseudolinguagem baseada em Portugol.",
+        "Tokens, autômato animado e árvore de derivação; teoria e passos reversíveis.",
+        "5 ex-alunos em avaliação preliminar; resultados do formulário não publicados.",
+        "Referência para teoria integrada; semântica e IR planejados."
+      ],
+      "evidence": [
+        [
+          "Web, entrada",
+          "§4, p. 227; §5.1, p. 228."
+        ],
+        [
+          "Exemplos NI",
+          "§7.1, p. 233: manual com programas prontos ainda seria elaborado. Isso não comprova ausência de quaisquer exemplos experimentáveis nos materiais; a disponibilidade desse recurso permanece não confirmada."
+        ],
+        [
+          "Léxica e sintática",
+          "§§5.1-5.2, p. 228-232; Figuras 3-12."
+        ],
+        [
+          "Árvore de derivação; AST NI",
+          "§5.2, p. 231-232: há terminais e não terminais; não é identificada uma AST distinta."
+        ],
+        [
+          "Semântica e código ✗",
+          "§7.1, p. 233: módulos futuros."
+        ],
+        [
+          "Passos, diagnósticos, explicações",
+          "§5.1, p. 228-229; §5.2, p. 231-232: próximo/anterior e destaque do erro."
+        ],
+        [
+          "Estudantes; aprendizagem ✗",
+          "§4, p. 227; §7.1, p. 233: cinco respostas; resultados não incluídos no artigo."
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "label": "Borela et al. (2025)",
+      "name": "Ferramenta educacional",
+      "old": true,
+      "vals": [
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "NI",
+        "✓",
+        "✓",
+        "✗",
+        "NI",
+        "✓",
+        "✓",
+        "✗"
+      ],
+      "profile": [
+        "Compilador didático; web; Java, ANTLR 4 e LLVM.",
+        "Linguagem própria inspirada em C.",
+        "Tokens, árvore de derivação, símbolos, IR/Assembly e execução; comparação de otimizações.",
+        "27 respondentes, dos quais 74,1% alunos; questionário de percepção, média geral 4,81/5.",
+        "Coordena código e representações; não apresenta algoritmo passo a passo."
+      ],
+      "evidence": [
+        [
+          "Web, entrada, exemplos",
+          "§3.1, p. 4; §3.2.3, p. 7: editor e seleção de exemplos."
+        ],
+        [
+          "Léxica, sintática, derivação",
+          "§3.2.2, p. 6; §3.2.3, p. 7. AST NI: o texto especifica árvore de derivação."
+        ],
+        [
+          "Semântica NI",
+          "§3.2.1, p. 5: tipagem/conversões implícitas descritas, sem detalhar verificações de nomes e tipos. NI não significa ausência de tratamento semântico."
+        ],
+        [
+          "Símbolos, código",
+          "§3.2.2, p. 6; §3.2.3, p. 7-8: funções/escopos, LLVM IR e Assembly."
+        ],
+        [
+          "Passos ✗; explicações",
+          "§2, p. 3, exclui passo a passo; §3.2.3, p. 7, descreve guia da linguagem. Diagnósticos NI: validar entrada não comprova mensagens didáticas."
+        ],
+        [
+          "Estudantes; aprendizagem ✗",
+          "§4, p. 8-9: questionário de aceitação e percepção; não é teste de conhecimento."
+        ]
+      ]
+    },
+    {
+      "id": "R",
+      "label": "Stamenković e Jovanović (2019)",
+      "name": "Revisão de simuladores",
+      "old": true,
+      "vals": [
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      "profile": [
+        "Revisão; JFLAP/jFAST desktop, Seshat web e Automata Simulator Android.",
+        "Não há linguagem de programas única. Java/Python são implementações das ferramentas.",
+        "Autômatos, tabelas e árvores; funcionalidades variam entre os quatro sistemas.",
+        "Relatos secundários de avaliações: jFAST 18, Seshat 56 e JFLAP cerca de 70 participantes.",
+        "Oferece critérios de comparação; não é uma ferramenta nem experimento próprios."
+      ],
+      "evidence": [
+        [
+          "N/A em toda a linha",
+          "§§5.1-5.4, p. 11-17, comparam quatro softwares. A unidade desta linha é uma revisão, por isso não se agregam funcionalidades nem amostras."
+        ],
+        [
+          "Plataformas e escopo",
+          "Tabelas 1-2, p. 17-18; versões examinadas em 2019, sem atualização automática para versões atuais."
+        ],
+        [
+          "Móvel e avaliação",
+          "§5.3, p. 14-16, descreve adaptação do Seshat e estudo de terceiros; §5.4, p. 16-17, aplicativo Android."
+        ]
+      ]
+    },
+    {
+      "id": "S",
+      "label": "Abounegm et al. (2024)",
+      "name": "STELLA",
+      "old": true,
+      "vals": [
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "NI",
+        "NI",
+        "✓",
+        "NI",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "✓",
+        "✓"
+      ],
+      "profile": [
+        "Curso, documentação, playground web e projetos-base locais.",
+        "STELLA, funcional e estaticamente tipada.",
+        "Verificadores de tipos com extensões incrementais; lexer/parser fornecidos.",
+        "49 alunos ativos em 2 turmas; desempenho em atividades, sem grupo de controle.",
+        "Orienta progressão de conceitos; pré-requisitos e regras de tipos diferem do Python introdutório."
+      ],
+      "evidence": [
+        [
+          "Web, entrada, exemplos, explicações",
+          "§2.3, p. 10; §§2.1-2.2, p. 4-9: documentação, editor e programas de exemplo. Não se exige biblioteca embutida na interface."
+        ],
+        [
+          "Léxica e sintática",
+          "§3.1, p. 10-11: componentes fornecidos/gerados para os projetos. Sua execução interna não confirma visualização de tokens/AST."
+        ],
+        [
+          "Semântica e diagnósticos",
+          "§2, p. 3; §4, p. 12-13: verificadores de tipos; §2.3, p. 10: saída de erros."
+        ],
+        [
+          "Estudantes e aprendizagem",
+          "§§4.3-4.4, p. 14-16: atividades e recursos implementados; aprendizagem descritiva do curso, sem efeito isolado do playground."
+        ],
+        [
+          "Demais NI",
+          "AST/derivação exibidas, tabela visual, IR exibida e navegação por passos não são confirmadas. Implementar compilador é opção, não prova de IR no playground."
+        ]
+      ]
+    },
+    {
+      "id": "H",
+      "label": "Herber e Weninger (2025)",
+      "name": "Visualizador de bytecode",
+      "old": true,
+      "vals": [
+        "✓",
+        "NI",
+        "✓",
+        "NI",
+        "NI",
+        "NI",
+        "NI",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "✓",
+        "NI",
+        "NI",
+        "✗"
+      ],
+      "profile": [
+        "Visualizador web baseado em rastros produzidos externamente.",
+        "MicroJava e seu bytecode.",
+        "Código/bytecode lado a lado, memória e navegação reversível.",
+        "Feedback piloto sem perfil/n informados; avaliação sistemática futura.",
+        "Inspira controle da navegação; interpretação não integra o escopo inicial do projeto."
+      ],
+      "evidence": [
+        [
+          "Web, exemplos",
+          "§III, p. 2-3; §VIII, p. 8-9 do manuscrito dos autores. Entrada direta/editável de código na interface: NI; carrega rastros."
+        ],
+        [
+          "Código exibido",
+          "§V, p. 4-5: mostra bytecode gerado externamente; não significa compilação pela interface."
+        ],
+        [
+          "Passos e diagnósticos",
+          "§VII, p. 7-8; §III, passo 8, p. 3; §IV.C, p. 4: navegação e erros do interpretador."
+        ],
+        [
+          "Símbolos NI",
+          "§IV.B, p. 4: metadados em regiões de memória não confirmam tabela estática de símbolos exibida."
+        ],
+        [
+          "Estudantes NI; aprendizagem ✗",
+          "§X, p. 10: avaliação sistemática ainda não realizada. Feedback piloto não identifica estudantes nem apresenta medidas de aprendizagem."
+        ]
+      ]
+    },
+    {
+      "id": "I",
+      "label": "Del Vado Vírseda (2023)",
+      "name": "ITT",
+      "old": true,
+      "vals": [
+        "NI",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "NI",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓"
+      ],
+      "profile": [
+        "Tutor interativo; aplicações locais Java (.jar), integrado a Flex/Bison.",
+        "Expressões aritméticas e progressão até PL/0; implementações em C/C++/Java.",
+        "Relaciona estados, regras, árvore de derivação, atributos e trechos da implementação.",
+        "Comparações entre grupos em três anos; medidas de notas e indicador composto de sucesso/motivação.",
+        "Referência para ligações teoria-código; requer ferramentas locais e não demonstra o recorte Python."
+      ],
+      "evidence": [
+        [
+          "Web NI; entrada e exemplos",
+          "§§3-4, p. 335-337: descrevem aplicações .jar e expressões. A plataforma local está confirmada, mas não se transforma a falta de menção a navegador em ausência comprovada. Correção conservadora da Etapa 3."
+        ],
+        [
+          "Léxica e sintática",
+          "§3, p. 335-336: scanner/parser gerados por Flex/Bison; §4, p. 337: inspeção interativa da análise."
+        ],
+        [
+          "Derivação ✓; AST NI",
+          "§4, p. 337, Figuras 3-4: construção com símbolos e produções; não identifica AST reduzida."
+        ],
+        [
+          "Semântica NI; símbolos NI",
+          "§§3-4 mostram avaliação de atributos de expressões. Isso não confirma verificações de nomes/tipos ou uma tabela de símbolos."
+        ],
+        [
+          "Código gerado NI",
+          "Código destacado é a implementação do analisador. Gerar scanner/parser não comprova exibição de código-alvo do programa analisado."
+        ],
+        [
+          "Passos, diagnósticos, explicações",
+          "§4, p. 337-338: estados, reduções, conflitos e trechos responsáveis; sessões guiadas."
+        ],
+        [
+          "Estudantes e aprendizagem",
+          "§§5-6, p. 338-339: grupos e notas; sucesso combina aprovação e motivação, não mede isoladamente domínio conceitual."
+        ]
+      ]
+    },
+    {
+      "id": "V",
+      "label": "Koitz-Hristov et al. (2025)",
+      "name": "VisOpt",
+      "old": true,
+      "vals": [
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓"
+      ],
+      "profile": [
+        "Visualizador web; compilador integrado e cliente interativo.",
+        "Jova (semelhante a Java), com destino Jasmin.",
+        "Otimizações locais em fonte, grafo de fluxo, IR e alvo; passos reversíveis e explicações.",
+        "Quase-experimento online com 53 mestrandos: 26 experimentais e 27 de comparação.",
+        "Orienta interação e avaliação; foco no back-end e sem melhora global significativa demonstrada."
+      ],
+      "evidence": [
+        [
+          "Web, entrada, exemplos",
+          "§3, p. 604; §3.2, p. 605: editor e programa inicial."
+        ],
+        [
+          "Léxica, sintática, semântica",
+          "§3.1, p. 604; §3.2, p. 605: análises internas e retorno de erros. Não se confirma ensino visual do front-end."
+        ],
+        [
+          "AST e derivação NI",
+          "§3.3, p. 605: grafo de fluxo não é uma árvore sintática."
+        ],
+        [
+          "Símbolos, código, passos, explicações",
+          "§§3.3-3.4, p. 605-606: tabela explicitamente nomeada, valores nas otimizações, IR/Jasmin, avanço/retorno, reprodução e texto explicativo."
+        ],
+        [
+          "Diagnósticos",
+          "§3.2, p. 605: mensagem e posição do erro."
+        ],
+        [
+          "Estudantes, aprendizagem",
+          "§§4.1-4.2, p. 607-608: pré/pós-teste. ✓ registra medição, não benefício; diferença global dos ganhos não significativa."
+        ]
+      ]
+    },
+    {
+      "id": "P",
+      "label": "Costagliola et al. (2022)",
+      "name": "ParVis",
+      "old": false,
+      "vals": [
+        "NI",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "NI",
+        "NI",
+        "NI",
+        "✓",
+        "✓",
+        "NI",
+        "✓",
+        "NI"
+      ],
+      "profile": [
+        "Visualizador Java de rastros; instâncias CUP/LALR e GPSR.",
+        "Entrada textual ou visual do parser instrumentado; sem recorte Python pronto.",
+        "Fonte, tokens, pilha, estados e árvores de derivação coordenados.",
+        "14 mestrandos; condições contrabalançadas; desempenho, tempo e SUS.",
+        "Informa interação e método; múltiplas janelas geraram dificuldades."
+      ],
+      "evidence": [
+        [
+          "Unidade e plataforma",
+          "§2, p. 300-303: recebe rastros e usa API Java/leitor JavaScript. Web, editor e biblioteca de exemplos: NI. Formulário web do experimento não torna o visualizador web."
+        ],
+        [
+          "Léxica e sintática",
+          "§3.1, p. 304-306: tokens com posições e execução LALR instrumentada. Componentes do parser são externos à visualização."
+        ],
+        [
+          "Derivação; AST NI",
+          "§3.1, p. 305-306: árvore parcial dos elementos da pilha. A árvore de eventos de §2 não é AST."
+        ],
+        [
+          "Passos e diagnósticos",
+          "§§2.1-2.2, p. 302-304; §3.1, p. 305: reprodução, retorno, saltos e eventos de erro sintático."
+        ],
+        [
+          "Estudantes; aprendizagem NI",
+          "§§4-5, p. 310-314: avaliação de tarefas assistidas e SUS. Aquisição/retenção de conhecimento não foi isolada."
+        ],
+        [
+          "Demais NI",
+          "Não se confirmam verificações de nomes/tipos, tabela de símbolos do programa, código-alvo ou teoria integrada. Pilha gramatical não é tabela de símbolos."
+        ]
+      ]
+    },
+    {
+      "id": "Y",
+      "label": "Livinskii et al. (2020)",
+      "name": "YARPGen / método de validação",
+      "old": false,
+      "vals": [
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A",
+        "N/A"
+      ],
+      "profile": [
+        "Gerador e arcabouço de teste diferencial; finalidade técnica.",
+        "Subconjunto de C/C++; compiladores GCC, LLVM e Intel.",
+        "Políticas de geração, prevenção de entradas indefinidas, comparação e redução.",
+        "Campanha de dois anos e experimentos técnicos; sem avaliação educacional.",
+        "Orienta diversidade e reprodução; seus recursos internos não são vistas didáticas."
+      ],
+      "evidence": [
+        [
+          "N/A: unidade metodológica",
+          "§§2-4, p. 196:2-196:20: valida compiladores industriais; não é ambiente de entrada/análise de programas de estudantes. N/A evita comparar recursos internos com vistas educacionais."
+        ],
+        [
+          "Pertinência e limites",
+          "§2 distingue falha interna e resultado errado; §3.3 trata diversidade; §3.4, reprodução; §4.5, limites da cobertura. Aplicações ao parser Python são adaptações desta proposta."
+        ]
+      ]
+    }
+  ]
+}

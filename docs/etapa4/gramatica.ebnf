@@ -1,0 +1,27 @@
+(* Gramática PROPOSTA, versão 1.0, 18/11/2026. Parser ainda não implementado. *)
+programa      = { comando }, EOF ;
+comando       = atribuicao, NEWLINE | condicional ;
+atribuicao    = IDENTIFICADOR, "=", expressao ;
+condicional   = "if", expressao, ":", NEWLINE, INDENT, bloco, DEDENT,
+                [ "else", ":", NEWLINE, INDENT, bloco, DEDENT ] ;
+bloco         = comando, { comando } ;
+expressao     = soma, [ comparador, soma ] ;
+comparador    = "==" | "!=" | "<" | "<=" | ">" | ">=" ;
+soma          = produto, { ("+" | "-"), produto } ;
+produto       = unaria, { ("*" | "/"), unaria } ;
+unaria        = ("+" | "-"), unaria | primaria ;
+primaria      = IDENTIFICADOR | LITERAL_INTEIRO | LITERAL_REAL
+                | "(", expressao, ")" ;
+
+(* As categorias terminais são produzidas pelo scanner da Etapa 3.
+   EOF é marcador interno a acrescentar no adaptador do parser; não altera os
+   tokens públicos do scanner. O último comando simples recebe NEWLINE mesmo
+   sem quebra física final, como já faz o scanner. Linhas vazias/comentários
+   não geram NEWLINE. Quebras dentro de parênteses não delimitam comandos.
+   +, -, * e / binários são associativos à esquerda; sinais unários, à direita.
+   Não há comparações encadeadas, comandos de expressão ou várias atribuições
+   na mesma linha. Não há declaração separada de variável sem inicialização.
+   O limite proposto de profundidade é 64 para parênteses e blocos; sua
+   ultrapassagem gera diagnóstico de limite, distinto de invalidade em Python.
+   Uma condição pode ser numérica: não se exige comparação nem booleano literal.
+   A gramática não verifica vinculação de nomes, tipos ou execução de ramos. *)

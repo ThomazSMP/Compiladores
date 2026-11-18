@@ -5,6 +5,20 @@ Software educacional web para demonstrar as fases de **análise léxica, sintát
 > **Status da Etapa 3:** scanner do subconjunto de Python integrado ao backend e à interface. Os tokens e erros léxicos são apresentados com posição. A interface, os exemplos, a validação de entrada e a comunicação da Etapa 2 foram preservados.
 > **Ainda não implementado:** parser (Etapa 4) e análise semântica (Etapa 5). Sucesso léxico não significa que o programa seja sintaticamente correto. O código recebido não é executado.
 
+> **Etapa 4 acadêmica (18/11/2026):** proposta metodológica, gramática, arquitetura, fluxograma, protocolo e 40 casos de teste definidos em [`docs/etapa4`](docs/etapa4/trabalho-etapa4.md). A implementação do parser/AST permanece prevista; a estrutura inicial de testes marca os casos ainda indisponíveis como pendentes, sem simular aprovação.
+
+### Materiais e Métodos - documentação da Etapa 4
+
+- [Texto do trabalho e matriz atualizada](docs/etapa4/trabalho-etapa4.md): sete fontes anteriores preservadas e duas novas.
+- [Fluxograma do estado atual e proposto](docs/etapa4/fluxograma.svg) e [arquitetura](docs/etapa4/arquitetura.svg).
+- [Gramática EBNF proposta](docs/etapa4/gramatica.ebnf) e [extensão do contrato](docs/etapa4/contrato-proposto.md).
+- [Protocolo pré-definido](docs/etapa4/protocolo-avaliacao.md), [casos e oráculos](docs/etapa4/casos-de-teste.md) e [dados canônicos](docs/etapa4/casos-de-teste.json).
+- [Formulário para futura avaliação por pares](docs/etapa4/formulario-pares.md) e [registro da verificação disponível](docs/etapa4/registro-verificacao.md).
+
+Os hashes da definição anterior aos testes estão em `docs/etapa4/congelamento-protocolo.json`. As novas verificações usam esse mesmo JSON localmente e no serviço Docker `backend-tests`, que monta `docs` somente para leitura. O registro de resultados é separado dos oráculos. O formulário ainda não foi aplicado.
+
+Os artigos completos acompanham o PDF de entrega acadêmica; este repositório contém suas referências e links oficiais. O arquivo do YARPGen possui permissão de cópia pessoal/em sala de aula e não é automaticamente republicado aqui.
+
 ## 1. Objetivo
 
 Ajudar estudantes de graduação a compreender como um compilador processa um programa. O usuário escreve (ou escolhe) um código, solicita a análise e vê o resultado em uma interface web.

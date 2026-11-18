@@ -1,0 +1,1647 @@
+{
+  "versao": "1.0",
+  "data_definicao": "2026-11-18",
+  "estado": "CONGELADO_ANTES_DA_EXECUCAO_DESTA_ETAPA",
+  "commit_base": "5d9d81acfff427d07e4f2229a9a363948a737835",
+  "observacao": "Nenhum resultado desta Etapa 4 foi preenchido neste arquivo. O histórico da Etapa 3 precede este protocolo e não constitui resultado do parser.",
+  "casos": [
+    {
+      "id": "CT-01",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 1",
+      "descricao": "Atribuição simples.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Numero",
+                  "lexema": "1",
+                  "categoria": "inteiro"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-02",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 2 + 3 * 4",
+      "descricao": "Multiplicação tem precedência sobre adição.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "+",
+                  "esquerda": {
+                    "tipo": "Numero",
+                    "lexema": "2",
+                    "categoria": "inteiro"
+                  },
+                  "direita": {
+                    "tipo": "Binaria",
+                    "operador": "*",
+                    "esquerda": {
+                      "tipo": "Numero",
+                      "lexema": "3",
+                      "categoria": "inteiro"
+                    },
+                    "direita": {
+                      "tipo": "Numero",
+                      "lexema": "4",
+                      "categoria": "inteiro"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-03",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = (2 + 3) * 4",
+      "descricao": "Parênteses alteram o agrupamento; não viram nós de pontuação.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "*",
+                  "esquerda": {
+                    "tipo": "Binaria",
+                    "operador": "+",
+                    "esquerda": {
+                      "tipo": "Numero",
+                      "lexema": "2",
+                      "categoria": "inteiro"
+                    },
+                    "direita": {
+                      "tipo": "Numero",
+                      "lexema": "3",
+                      "categoria": "inteiro"
+                    }
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "4",
+                    "categoria": "inteiro"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-04",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = -2 * 3",
+      "descricao": "Sinal unário se associa ao operando antes da multiplicação.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "*",
+                  "esquerda": {
+                    "tipo": "Unaria",
+                    "operador": "-",
+                    "operando": {
+                      "tipo": "Numero",
+                      "lexema": "2",
+                      "categoria": "inteiro"
+                    }
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "3",
+                    "categoria": "inteiro"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-05",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 2 < 3",
+      "descricao": "Comparação simples como expressão; não é declaração de tipo.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Comparacao",
+                  "operador": "<",
+                  "esquerda": {
+                    "tipo": "Numero",
+                    "lexema": "2",
+                    "categoria": "inteiro"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "3",
+                    "categoria": "inteiro"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-06",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "if x > 0:\n    y = 1\n",
+      "descricao": "Condicional sem else; nome x pode ser aceito sintaticamente sem verificação semântica.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Se",
+                "condicao": {
+                  "tipo": "Comparacao",
+                  "operador": ">",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "x"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "0",
+                    "categoria": "inteiro"
+                  }
+                },
+                "entao": [
+                  {
+                    "tipo": "Atribuicao",
+                    "alvo": {
+                      "tipo": "Nome",
+                      "identificador": "y"
+                    },
+                    "valor": {
+                      "tipo": "Numero",
+                      "lexema": "1",
+                      "categoria": "inteiro"
+                    }
+                  }
+                ],
+                "senao": []
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-07",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "if x > 0:\n    y = 1\nelse:\n    y = 2\n",
+      "descricao": "Condicional com alternativas.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Se",
+                "condicao": {
+                  "tipo": "Comparacao",
+                  "operador": ">",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "x"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "0",
+                    "categoria": "inteiro"
+                  }
+                },
+                "entao": [
+                  {
+                    "tipo": "Atribuicao",
+                    "alvo": {
+                      "tipo": "Nome",
+                      "identificador": "y"
+                    },
+                    "valor": {
+                      "tipo": "Numero",
+                      "lexema": "1",
+                      "categoria": "inteiro"
+                    }
+                  }
+                ],
+                "senao": [
+                  {
+                    "tipo": "Atribuicao",
+                    "alvo": {
+                      "tipo": "Nome",
+                      "identificador": "y"
+                    },
+                    "valor": {
+                      "tipo": "Numero",
+                      "lexema": "2",
+                      "categoria": "inteiro"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-08",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "if x > 0:\n    if y < 2:\n        z = 1\n    else:\n        z = 2\nelse:\n    z = 3\n",
+      "descricao": "Blocos aninhados; cada else se associa ao if do mesmo nível.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C3",
+        "C7"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Se",
+                "condicao": {
+                  "tipo": "Comparacao",
+                  "operador": ">",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "x"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "0",
+                    "categoria": "inteiro"
+                  }
+                },
+                "entao": [
+                  {
+                    "tipo": "Se",
+                    "condicao": {
+                      "tipo": "Comparacao",
+                      "operador": "<",
+                      "esquerda": {
+                        "tipo": "Nome",
+                        "identificador": "y"
+                      },
+                      "direita": {
+                        "tipo": "Numero",
+                        "lexema": "2",
+                        "categoria": "inteiro"
+                      }
+                    },
+                    "entao": [
+                      {
+                        "tipo": "Atribuicao",
+                        "alvo": {
+                          "tipo": "Nome",
+                          "identificador": "z"
+                        },
+                        "valor": {
+                          "tipo": "Numero",
+                          "lexema": "1",
+                          "categoria": "inteiro"
+                        }
+                      }
+                    ],
+                    "senao": [
+                      {
+                        "tipo": "Atribuicao",
+                        "alvo": {
+                          "tipo": "Nome",
+                          "identificador": "z"
+                        },
+                        "valor": {
+                          "tipo": "Numero",
+                          "lexema": "2",
+                          "categoria": "inteiro"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "senao": [
+                  {
+                    "tipo": "Atribuicao",
+                    "alvo": {
+                      "tipo": "Nome",
+                      "identificador": "z"
+                    },
+                    "valor": {
+                      "tipo": "Numero",
+                      "lexema": "3",
+                      "categoria": "inteiro"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-09",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 2\ny = x + 3\nif y >= 5:\n    y = y / 2\n",
+      "descricao": "Múltiplas construções em sequência.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C7"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Numero",
+                  "lexema": "2",
+                  "categoria": "inteiro"
+                }
+              },
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "y"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "+",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "x"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "3",
+                    "categoria": "inteiro"
+                  }
+                }
+              },
+              {
+                "tipo": "Se",
+                "condicao": {
+                  "tipo": "Comparacao",
+                  "operador": ">=",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "y"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "5",
+                    "categoria": "inteiro"
+                  }
+                },
+                "entao": [
+                  {
+                    "tipo": "Atribuicao",
+                    "alvo": {
+                      "tipo": "Nome",
+                      "identificador": "y"
+                    },
+                    "valor": {
+                      "tipo": "Binaria",
+                      "operador": "/",
+                      "esquerda": {
+                        "tipo": "Nome",
+                        "identificador": "y"
+                      },
+                      "direita": {
+                        "tipo": "Numero",
+                        "lexema": "2",
+                        "categoria": "inteiro"
+                      }
+                    }
+                  }
+                ],
+                "senao": []
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-10",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "a = .5\nb = 5.\nc = 00.5",
+      "descricao": "Formas reais reconhecidas pelo scanner atual.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C2"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "a"
+                },
+                "valor": {
+                  "tipo": "Numero",
+                  "lexema": ".5",
+                  "categoria": "real"
+                }
+              },
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "b"
+                },
+                "valor": {
+                  "tipo": "Numero",
+                  "lexema": "5.",
+                  "categoria": "real"
+                }
+              },
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "c"
+                },
+                "valor": {
+                  "tipo": "Numero",
+                  "lexema": "00.5",
+                  "categoria": "real"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-11",
+      "categoria": "valido_sintaticamente",
+      "fase_alvo": "sintatica",
+      "entrada": "y = x + 1",
+      "descricao": "Nome não vinculado não deve ser tratado como erro de sintaxe.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C5"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "y"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "+",
+                  "esquerda": {
+                    "tipo": "Nome",
+                    "identificador": "x"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "1",
+                    "categoria": "inteiro"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-12",
+      "categoria": "valido",
+      "fase_alvo": "sintatica",
+      "entrada": "x = (1 +\n    2)\n",
+      "descricao": "Quebra dentro de parênteses não abre bloco.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C2"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "valido",
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": [
+              {
+                "tipo": "Atribuicao",
+                "alvo": {
+                  "tipo": "Nome",
+                  "identificador": "x"
+                },
+                "valor": {
+                  "tipo": "Binaria",
+                  "operador": "+",
+                  "esquerda": {
+                    "tipo": "Numero",
+                    "lexema": "1",
+                    "categoria": "inteiro"
+                  },
+                  "direita": {
+                    "tipo": "Numero",
+                    "lexema": "2",
+                    "categoria": "inteiro"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-13",
+      "categoria": "lexico_valido",
+      "fase_alvo": "lexica",
+      "entrada": "if else ifx _x1",
+      "descricao": "Palavras inteiras e identificadores não confundidos.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true,
+          "tokens_significativos": [
+            [
+              "PALAVRA_RESERVADA",
+              "if",
+              1,
+              1
+            ],
+            [
+              "PALAVRA_RESERVADA",
+              "else",
+              1,
+              4
+            ],
+            [
+              "IDENTIFICADOR",
+              "ifx",
+              1,
+              9
+            ],
+            [
+              "IDENTIFICADOR",
+              "_x1",
+              1,
+              13
+            ]
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-14",
+      "categoria": "lexico_valido",
+      "fase_alvo": "lexica",
+      "entrada": "a<=b != c == d >= e",
+      "descricao": "Maior lexema para operadores compostos; a sequência não é oráculo sintático.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true,
+          "operadores": [
+            "<=",
+            "!=",
+            "==",
+            ">="
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-15",
+      "categoria": "lexico_valido",
+      "fase_alvo": "lexica",
+      "entrada": "a = 0\nb = .5\nc = 5.\nd = 00.5",
+      "descricao": "Inteiro e reais decimais.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true,
+          "contagem_tipos": {
+            "LITERAL_INTEIRO": 1,
+            "LITERAL_REAL": 3
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-16",
+      "categoria": "lexico_valido",
+      "fase_alvo": "lexica",
+      "entrada": "# início\nx = 10 # anotação\ny=2",
+      "descricao": "Comentário ignorado, posição da linha seguinte preservada.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C7"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true,
+          "primeiro_token": [
+            "IDENTIFICADOR",
+            "x",
+            2,
+            1
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-17",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "x = @ 2\ny = 3",
+      "descricao": "Caractere inválido, recuperação e bloqueio futuro do parser.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "@",
+              1,
+              5
+            ]
+          ],
+          "ultimo_token_significativo": [
+            "LITERAL_INTEIRO",
+            "3",
+            2,
+            5
+          ]
+        },
+        "sintatico": {
+          "executar": false,
+          "estado": "nao_executado",
+          "ast": null
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-18",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "x = 123abc",
+      "descricao": "Identificador iniciado por dígitos é uma sequência numérica inválida única.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "123abc",
+              1,
+              5
+            ]
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-19",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "x = 1.2.3",
+      "descricao": "Literal numérico com dois pontos.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "1.2.3",
+              1,
+              5
+            ]
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-20",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "x = \"texto",
+      "descricao": "Literal textual não fechado; strings também estão fora do recorte.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "\"texto",
+              1,
+              5
+            ]
+          ],
+          "mensagem_contem": "não fechado"
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-21",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "x = @ 2\ny = $ 3",
+      "descricao": "Mais de um erro com posições independentes.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "@",
+              1,
+              5
+            ],
+            [
+              "$",
+              2,
+              5
+            ]
+          ]
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-22",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "if x:\n\ty=1",
+      "descricao": "Tabulação inicial fora do subconjunto, sem falha interna.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "\t",
+              2,
+              1
+            ]
+          ],
+          "mensagem_contem": "tabulação"
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-23",
+      "categoria": "erro_lexico",
+      "fase_alvo": "lexica",
+      "entrada": "if x:\n    y=1\n  z=2",
+      "descricao": "Retorno de recuo que não corresponde a nível anterior.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": false,
+          "erros": [
+            [
+              "  ",
+              3,
+              1
+            ]
+          ],
+          "mensagem_contem": "recuo"
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-24",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "if x > 0\n    y = 1\n",
+      "descricao": "Falta de dois-pontos após condição.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": ":",
+            "encontrado": "NEWLINE",
+            "linha": 1,
+            "coluna": 9
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-25",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "x = (2 + 3",
+      "descricao": "Parêntese de fechamento ausente.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": ")",
+            "encontrado": "EOF",
+            "linha": 1,
+            "coluna": 11
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-26",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 2 +",
+      "descricao": "Falta de operando; os tokens são lexicamente válidos.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "expressao_primaria",
+            "encontrado": "NEWLINE",
+            "linha": 1,
+            "coluna": 8
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-27",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "else:\n    x = 1\n",
+      "descricao": "Else sem condicional correspondente.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "atribuicao_ou_if",
+            "encontrado": "else",
+            "linha": 1,
+            "coluna": 1
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-28",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "x = = 2",
+      "descricao": "Operador de atribuição onde se espera operando.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "expressao_primaria",
+            "encontrado": "=",
+            "linha": 1,
+            "coluna": 5
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-29",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "if = 2",
+      "descricao": "Palavra reservada não serve de alvo de atribuição.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "expressao_primaria",
+            "encontrado": "=",
+            "linha": 1,
+            "coluna": 4
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-30",
+      "categoria": "erro_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "if x > 0:\n",
+      "descricao": "Fim antes do bloco obrigatório.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "INDENT",
+            "encontrado": "EOF",
+            "linha": 2,
+            "coluna": 1
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-31",
+      "categoria": "fora_do_recorte_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "x = 1 < 2 < 3",
+      "descricao": "Comparação encadeada é válida em Python completo, mas excluída desta gramática.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "NEWLINE",
+            "encontrado": "<",
+            "linha": 1,
+            "coluna": 11
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-32",
+      "categoria": "fora_do_recorte_sintatico",
+      "fase_alvo": "sintatica",
+      "entrada": "x",
+      "descricao": "Expressão isolada é válida em Python completo; o recorte exige atribuição ou if.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C4"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "estado": "invalido",
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "esperado": "=",
+            "encontrado": "NEWLINE",
+            "linha": 1,
+            "coluna": 2
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-33",
+      "categoria": "semantico_futuro",
+      "fase_alvo": "semantica",
+      "entrada": "y = x + 1",
+      "descricao": "Uso de nome sem vinculação anterior no módulo do recorte. Não é erro sintático.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C12"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "sucesso": true
+        },
+        "semantico_futuro": {
+          "diagnostico": "nome_nao_vinculado",
+          "identificador": "x",
+          "linha": 1,
+          "coluna": 5
+        },
+        "estado_implementacao": "ETAPA_5_NAO_IMPLEMENTADA"
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-34",
+      "categoria": "semantico_futuro",
+      "fase_alvo": "semantica",
+      "entrada": "cond = 1\nif cond > 0:\n    x = 2\ny = x",
+      "descricao": "Análise conservadora de vinculação, sem execução do programa: x só é atribuído em um ramo.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C12"
+      ],
+      "expectativa": {
+        "semantico_futuro": {
+          "diagnostico": "possivel_uso_antes_de_atribuicao",
+          "identificador": "x",
+          "natureza": "aviso_estatico_conservador"
+        },
+        "observacao": "Não afirmar NameError inevitável; o ramo pode ser executado. Não há execução nem propagação de constantes prevista.",
+        "estado_implementacao": "ETAPA_5_NAO_IMPLEMENTADA"
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-35",
+      "categoria": "semantico_futuro",
+      "fase_alvo": "semantica",
+      "entrada": "x = 1\nx = 2\ny = x",
+      "descricao": "Reatribuição não é redeclaração proibida em Python.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C12"
+      ],
+      "expectativa": {
+        "semantico_futuro": {
+          "diagnostico_de_redeclaracao": false,
+          "nome_x_disponivel": true
+        },
+        "estado_implementacao": "ETAPA_5_NAO_IMPLEMENTADA"
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-36",
+      "categoria": "semantico_futuro",
+      "fase_alvo": "semantica",
+      "entrada": "if 1:\n    x = 2\ny = x",
+      "descricao": "If não introduz escopo próprio de nomes em Python.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C12"
+      ],
+      "expectativa": {
+        "semantico_futuro": {
+          "erro_de_escopo_if": false,
+          "observacao": "Um eventual aviso conservador de atribuição condicional não deve ser chamado de uso fora de escopo."
+        },
+        "estado_implementacao": "ETAPA_5_NAO_IMPLEMENTADA"
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-37",
+      "categoria": "borda",
+      "fase_alvo": "entrada",
+      "entrada": "",
+      "descricao": "Entrada vazia recusada antes do scanner.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C4",
+        "C9"
+      ],
+      "expectativa": {
+        "validacao": {
+          "aceita": false,
+          "http": 400,
+          "tipo": "entrada_vazia"
+        },
+        "sintatico": {
+          "executar": false
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-38",
+      "categoria": "borda",
+      "fase_alvo": "lexica",
+      "entrada": "# apenas comentário",
+      "descricao": "Fonte sem comandos, mas não vazia: scanner retorna lista vazia.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C1",
+        "C2"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true,
+          "quantidade_tokens": 0
+        },
+        "sintatico_futuro": {
+          "sucesso": true,
+          "ast": {
+            "tipo": "Programa",
+            "corpo": []
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-39",
+      "categoria": "borda",
+      "fase_alvo": "entrada",
+      "entrada": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "descricao": "10.001 caracteres excedem o limite de 10.000.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C9"
+      ],
+      "expectativa": {
+        "validacao": {
+          "aceita": false,
+          "http": 413,
+          "tipo": "entrada_muito_grande"
+        },
+        "sintatico": {
+          "executar": false
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    },
+    {
+      "id": "CT-40",
+      "categoria": "borda",
+      "fase_alvo": "sintatica",
+      "entrada": "x = (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((1)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))",
+      "descricao": "Limite proposto de 64 níveis de parênteses/blocos excedido; não significa Python inválido.",
+      "origem": "Elaborado para este projeto, conforme o subconjunto documentado.",
+      "criterios": [
+        "C2",
+        "C9"
+      ],
+      "expectativa": {
+        "lexico": {
+          "sucesso": true
+        },
+        "sintatico": {
+          "executar": true,
+          "sucesso": false,
+          "ast": null,
+          "diagnostico": {
+            "tipo": "limite_aninhamento_excedido",
+            "natureza": "limite_do_subconjunto",
+            "limite": 64
+          }
+        }
+      },
+      "estado_avaliacao": "PENDENTE",
+      "resultado_observado": null,
+      "defeito_identificado": null,
+      "correcao_realizada": null
+    }
+  ]
+}

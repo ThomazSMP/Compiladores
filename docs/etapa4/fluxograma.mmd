@@ -1,0 +1,25 @@
+flowchart TD
+    A["I: usuário insere/seleciona código"] --> B["I: validação frontend/backend"]
+    B --> C{"I: entrada válida?"}
+    C -->|não| E["I: HTTP 400/413 e orientação"]
+    C -->|sim| D["I: scanner manual"]
+    D --> T["I: tokens e erros léxicos"]
+    T --> R["I: interface de tokens/erros"]
+    T -.-> Q{"P: há erros léxicos?"}
+    Q -.->|sim| N["P: parser não executado; AST nula"]
+    Q -.->|não| P["P: parser descendente recursivo"]
+    P -.-> V{"P: sintaxe aceita?"}
+    V -.->|sim| AST["P: AST estruturada"]
+    V -.->|não| ERR["P: primeiro erro sintático; AST nula"]
+    E --> R
+    N -.-> R
+    AST -.-> PR["P: apresentação de AST/diagnósticos separados"]
+    ERR -.-> PR
+    AST -.-> F["F: Etapa 5 - semântica e tabela de símbolos"]
+    F -.-> PR
+    classDef atual fill:#ddebf3,stroke:#233b4a;
+    classDef proposto fill:#fff1d8,stroke:#233b4a,stroke-dasharray:5 3;
+    classDef futuro fill:#edf0f3,stroke:#233b4a,stroke-dasharray:2 3;
+    class A,B,C,D,T,R,E atual;
+    class Q,N,P,V,AST,ERR,PR proposto;
+    class F futuro;

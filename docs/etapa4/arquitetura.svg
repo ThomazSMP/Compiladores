@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="740" height="335" preserveAspectRatio="xMinYMin meet" viewBox="0 0 740 335" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="740" height="335"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-335)" style="clip-path: url(#clip)">
+		<g transform="">
+			<text x="191.1775" y="316" style="font-family: Helvetica; font-size: 15px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,632) scale(1,-1)">Arquitetura: materiais existentes e módulos propostos</text>
+			<rect x="15" y="107" width="180" height="164" rx="6" ry="6" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(86%,92%,95%); fill-rule: evenodd;"/>
+			<text x="74.985" y="205.16666666666666" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,410) scale(1,-1)">[I] Navegador</text>
+			<text x="49.42999999999999" y="192.16666666666666" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,384) scale(1,-1)">HTML, CSS e JavaScript</text>
+			<text x="43.025000000000006" y="179.16666666666666" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,358) scale(1,-1)">Entrada, exemplos e tokens</text>
+			<text x="42.195" y="166.16666666666666" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,332) scale(1,-1)">[P] Vista hierárquica de AST</text>
+			<rect x="250" y="128" width="155" height="120" rx="6" ry="6" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(86%,92%,95%); fill-rule: evenodd;"/>
+			<text x="285.227" y="203.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,406) scale(1,-1)">[I] Contêiner frontend</text>
+			<text x="308.492" y="191.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,382) scale(1,-1)">Nginx :80</text>
+			<text x="284.73199999999997" y="179.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,358) scale(1,-1)">Estáticos e proxy /api</text>
+			<text x="266.97950000000003" y="167.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,334) scale(1,-1)">Host: 8080 (ou PORTA_WEB)</text>
+			<rect x="445" y="55" width="280" height="229" rx="6" ry="6" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(86%,92%,95%); fill-rule: evenodd;"/>
+			<text x="532.7225" y="207.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,415) scale(1,-1)">[I] Contêiner backend</text>
+			<text x="516.206" y="193.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,387) scale(1,-1)">Python 3.12 / FastAPI :8000</text>
+			<text x="585.0" y="179.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,359) scale(1,-1)"></text>
+			<text x="528.9" y="165.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,331) scale(1,-1)">[I] Validação + scanner</text>
+			<text x="509.9525" y="151.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,303) scale(1,-1)">[P] Parser + construtor de AST</text>
+			<text x="523.257" y="137.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,275) scale(1,-1)">[F] Verificação semântica</text>
+			<text x="529.0595" y="123.83333333333334" style="font-family: Helvetica; font-size: 11px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,247) scale(1,-1)">[F] Tabela de símbolos</text>
+			<path d="M 195,220 L 250,220 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="250 220, 245.4978 222.1748, 245.4978 217.8252" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(13%,23%,29%); fill-rule: evenodd;"/>
+			<text x="197.776" y="231" style="font-family: Helvetica; font-size: 8px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,462) scale(1,-1)">HTTP/JSON</text>
+			<path d="M 250,155 L 195,155 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="195 155, 199.5022 152.8252, 199.5022 157.1748" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(13%,23%,29%); fill-rule: evenodd;"/>
+			<text x="205.66" y="142" style="font-family: Helvetica; font-size: 8px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,284) scale(1,-1)">resposta</text>
+			<path d="M 405,220 L 445,220 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="445 220, 440.4978 222.1748, 440.4978 217.8252" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(13%,23%,29%); fill-rule: evenodd;"/>
+			<text x="418.552" y="231" style="font-family: Helvetica; font-size: 8px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,462) scale(1,-1)">/api</text>
+			<path d="M 445,155 L 405,155 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="405 155, 409.5022 152.8252, 409.5022 157.1748" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(13%,23%,29%); fill-rule: evenodd;"/>
+			<text x="415.332" y="143" style="font-family: Helvetica; font-size: 8px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,286) scale(1,-1)">JSON</text>
+			<rect x="15" y="25" width="390" height="54" rx="6" ry="6" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; fill: rgb(86%,92%,95%); fill-rule: evenodd;"/>
+			<text x="110.79" y="55.166666666666664" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,110) scale(1,-1)">[I] Git, pytest/httpx, Node e Docker Compose</text>
+			<text x="97.44999999999999" y="42.166666666666664" style="font-family: Helvetica; font-size: 10px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,84) scale(1,-1)">[P] EBNF, casos/oráculos e protocolo de avaliação</text>
+			<path d="M 405,52 L 430,52 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; stroke-dasharray: 4, 3;"/>
+			<path d="M 430,52 L 430,86 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; stroke-dasharray: 4, 3;"/>
+			<path d="M 430,86 L 445,86 Z" style="stroke: rgb(13%,23%,29%); stroke-linecap: butt; stroke-width: 1; stroke-dasharray: 4, 3;"/>
+			<polygon points="445 86, 440.4978 88.17483, 440.4978 83.82517" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(13%,23%,29%); fill-rule: evenodd;"/>
+			<text x="194.914" y="6" style="font-family: Helvetica; font-size: 9px;fill: rgb(13%,23%,29%); stroke:none;" transform="translate(0,12) scale(1,-1)">Sem execução do código recebido; sem banco de dados ou serviço externo obrigatório.</text>
+		</g>
+	</g>
+</svg>
