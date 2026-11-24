@@ -63,7 +63,7 @@
         } catch (erroJson) {
           corpo = null; // por exemplo, página de erro HTML do Nginx
         }
-        ui.mostrarResultado(logica.interpretarResposta(resposta.status, corpo));
+        ui.mostrarResultado(logica.interpretarResposta(resposta.status, corpo), codigo);
       } catch (erroRede) {
         ui.mostrarResultado({ tipo: "erro_comunicacao", mensagem: logica.MENSAGENS.comunicacao });
       } finally {

@@ -23,7 +23,8 @@
     if (typeof codigo !== "string" || codigo.trim() === "") {
       return { valido: false, tipo: "entrada_vazia", mensagem: MENSAGENS.entradaVazia };
     }
-    if (codigo.length > TAMANHO_MAXIMO) {
+    // O limite do backend conta pontos de código, em vez de unidades UTF-16.
+    if (codigo.length > TAMANHO_MAXIMO && Array.from(codigo).length > TAMANHO_MAXIMO) {
       return { valido: false, tipo: "entrada_muito_grande", mensagem: MENSAGENS.entradaGrande };
     }
     return { valido: true };
@@ -37,19 +38,52 @@
     };
   }
 
+  /* Traduz posições do scanner/parser em índices UTF-16 usados pela textarea. */
+  function intervaloNoCodigo(codigo, no) {
+    const posicoes = [no.linha, no.coluna, no.linha_fim, no.coluna_fim];
+    if (!posicoes.every((valor) => Number.isInteger(valor) && valor > 0)) return null;
+    const quebras = /\r\n|[\n\r\v\f\x1c-\x1e\x85\u2028\u2029]/g;
+    const linhas = [];
+    let inicio = 0;
+    for (const quebra of codigo.matchAll(quebras)) {
+      linhas.push({ inicio: inicio, fim: quebra.index });
+      inicio = quebra.index + quebra[0].length;
+    }
+    linhas.push({ inicio: inicio, fim: codigo.length });
+    function indice(linha, coluna) {
+      const trecho = linhas[linha - 1];
+      if (!trecho) return null;
+      const caracteres = Array.from(codigo.slice(trecho.inicio, trecho.fim));
+      if (coluna > caracteres.length + 1) return null;
+      return trecho.inicio + caracteres.slice(0, coluna - 1).join("").length;
+    }
+    const primeiro = indice(no.linha, no.coluna);
+    const ultimo = indice(no.linha_fim, no.coluna_fim);
+    return primeiro === null || ultimo === null || ultimo < primeiro ? null : [primeiro, ultimo];
+  }
+
   /* Converte (status HTTP, corpo JSON ou null) em algo que a interface sabe exibir. */
   function interpretarResposta(status, corpo) {
     const ehObjeto = corpo !== null && typeof corpo === "object";
     const temErro = ehObjeto && corpo.erro && typeof corpo.erro.mensagem === "string";
 
     if (status >= 200 && status < 300 && ehObjeto && corpo.recebido === true) {
+      const lexicoInvalido = corpo.sucesso === false;
+      const estadoSintatico = lexicoInvalido ? "nao_executado" : corpo.estado_sintatico;
+      const sintaxeInvalida = estadoSintatico === "invalido";
+      let mensagem = typeof corpo.mensagem === "string" ? corpo.mensagem : "Código recebido com sucesso.";
+      if (lexicoInvalido) mensagem = "Foram encontrados erros léxicos. Confira os diagnósticos e os tokens reconhecidos.";
+      else if (sintaxeInvalida) mensagem = "A análise léxica terminou. Confira o erro sintático indicado.";
+      else if (estadoSintatico === "valido") mensagem = "Análises léxica e sintática concluídas.";
       return {
-        tipo: corpo.sucesso === false ? "erro_lexico" : "sucesso",
-        mensagem: typeof corpo.mensagem === "string" ? corpo.mensagem :
-          (corpo.sucesso === false ? "Foram encontrados erros léxicos. Confira as mensagens e os tokens reconhecidos." : "Código recebido com sucesso."),
+        tipo: lexicoInvalido ? "erro_lexico" : sintaxeInvalida ? "erro_sintatico" : "sucesso",
+        mensagem: mensagem,
         detalhes: ehObjeto && corpo.resumo && typeof corpo.resumo === "object" ? corpo.resumo : null,
         tokens: Array.isArray(corpo.tokens) ? corpo.tokens : null,
         erros: Array.isArray(corpo.erros) ? corpo.erros : [],
+        estadoSintatico: estadoSintatico,
+        ast: estadoSintatico === "valido" ? corpo.ast : null,
+        errosSintaticos: sintaxeInvalida && Array.isArray(corpo.erros_sintaticos) ? corpo.erros_sintaticos : [],
       };
     }
     if (temErro && status >= 400 && status < 500) {
@@ -64,5 +98,5 @@
     return { tipo: "erro_servidor", mensagem: MENSAGENS.erroInesperado };
   }
 
-  return { TAMANHO_MAXIMO, MENSAGENS, validarEntrada, montarRequisicao, interpretarResposta };
+  return { TAMANHO_MAXIMO, MENSAGENS, validarEntrada, montarRequisicao, intervaloNoCodigo, interpretarResposta };
 });

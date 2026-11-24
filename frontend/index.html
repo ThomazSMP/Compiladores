@@ -30,14 +30,14 @@
       </div>
 
       <button id="btn-analisar" type="button">Analisar código</button>
-      <p class="dica">Atalho: Ctrl + Enter (⌘ + Enter no Mac)</p>
+      <p class="dica">Limite de 10.000 caracteres. Atalho: Ctrl + Enter (⌘ + Enter no Mac).</p>
     </section>
 
     <section class="painel" aria-labelledby="titulo-resultados">
       <h2 id="titulo-resultados">2. Resultados</h2>
       <div id="resultados" class="resultados resultados--info" role="status" aria-live="polite">
         <p>Informe ou selecione um código e clique em <strong>Analisar código</strong> para ver
-           seus tokens e eventuais erros léxicos. A sintaxe e a semântica ainda não são verificadas.</p>
+           seus tokens, a árvore sintática ou os diagnósticos de erro.</p>
       </div>
     </section>
   </main>
@@ -46,6 +46,7 @@
 
   <script src="js/logica.js"></script>
   <script src="js/controlador.js"></script>
+  <script src="js/ast.js"></script>
   <script src="js/resultados.js"></script>
   <script src="js/app.js"></script>
 </body>

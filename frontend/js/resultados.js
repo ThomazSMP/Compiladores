@@ -1,11 +1,11 @@
-/* Apresentação de tokens. Todo conteúdo vindo do programa usa textContent. */
+/* Apresentação de tokens, árvore e diagnósticos. Conteúdo usa textContent. */
 (function (raiz, fabrica) {
-  if (typeof module === "object" && module.exports) module.exports = fabrica();
-  else raiz.Resultados = fabrica();
-})(typeof self !== "undefined" ? self : this, function () {
+  if (typeof module === "object" && module.exports) module.exports = fabrica(require("./ast.js"));
+  else raiz.Resultados = fabrica(raiz.ArvoreSintatica);
+})(typeof self !== "undefined" ? self : this, function (arvore) {
   "use strict";
 
-  function mostrar(documento, area, resultado) {
+  function mostrar(documento, area, resultado, selecionarNo) {
     function criar(tag, texto, classe) {
       const el = documento.createElement(tag);
       if (texto !== undefined) el.textContent = texto;
@@ -19,6 +19,26 @@
         lista.appendChild(criar("li", "Linha " + erro.linha + ", coluna " + erro.coluna + ": " + erro.mensagem));
       });
       area.appendChild(lista);
+    }
+    if (resultado.estadoSintatico === "nao_executado") {
+      area.appendChild(criar("p", "Análise sintática não executada. Corrija os erros léxicos e analise novamente.", "estado-sintatico"));
+    }
+    if (resultado.errosSintaticos && resultado.errosSintaticos.length) {
+      area.appendChild(criar("h3", "Erros sintáticos (" + resultado.errosSintaticos.length + ")"));
+      const lista = criar("ul", undefined, "erros-sintaticos");
+      resultado.errosSintaticos.forEach(function (erro) {
+        const item = criar("li");
+        item.appendChild(criar("p", erro.mensagem));
+        if (erro.esperado !== undefined) {
+          const regra = erro.regra ? "Regra " + erro.regra + " · " : "";
+          item.appendChild(criar("p", regra + "Esperado: " + erro.esperado, "explicacao"));
+        }
+        lista.appendChild(item);
+      });
+      area.appendChild(lista);
+    }
+    if (resultado.estadoSintatico === "valido" && resultado.ast) {
+      area.appendChild(arvore.montar(criar, resultado.ast, selecionarNo));
     }
     if (!Array.isArray(resultado.tokens)) return;
     const tokens = resultado.tokens;
@@ -58,15 +78,17 @@
     });
     tabela.appendChild(corpo); rolagem.appendChild(tabela); area.appendChild(rolagem);
     let indice = 0;
-    function atualizar() {
-      linhas.forEach(function (linha, i) { linha.className = i === indice ? "token-ativo" : ""; });
+    function atualizar(novoIndice) {
+      linhas[indice].className = "";
+      indice = novoIndice;
+      linhas[indice].className = "token-ativo";
       const token = tokens[indice];
       passo.textContent = "Token " + (indice + 1) + " de " + tokens.length + ": " + token.tipo + " — " + JSON.stringify(token.lexema) + " (linha " + token.linha + ", coluna " + token.coluna + ")";
       anterior.disabled = indice === 0; proximo.disabled = indice === tokens.length - 1;
     }
-    anterior.addEventListener("click", function () { if (indice > 0) { indice -= 1; atualizar(); } });
-    proximo.addEventListener("click", function () { if (indice < tokens.length - 1) { indice += 1; atualizar(); } });
-    atualizar();
+    anterior.addEventListener("click", function () { if (indice > 0) atualizar(indice - 1); });
+    proximo.addEventListener("click", function () { if (indice < tokens.length - 1) atualizar(indice + 1); });
+    atualizar(0);
   }
   return { mostrar: mostrar };
 });

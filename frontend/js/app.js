@@ -35,7 +35,7 @@
       });
       seletor.disabled = lista.length === 0;
     },
-    mostrarResultado: function (resultado) {
+    mostrarResultado: function (resultado, codigoAnalisado) {
       area.className = "resultados resultados--" + resultado.tipo;
       area.textContent = "";
       area.appendChild(paragrafo(resultado.mensagem));
@@ -45,7 +45,14 @@
           "detalhes"
         ));
       }
-      window.Resultados.mostrar(document, area, resultado);
+      window.Resultados.mostrar(document, area, resultado, function (no) {
+        if (campoCodigo.value !== codigoAnalisado) return "codigo_alterado";
+        const intervalo = window.Logica.intervaloNoCodigo(codigoAnalisado, no);
+        if (intervalo === null) return "posicao_indisponivel";
+        campoCodigo.focus();
+        campoCodigo.setSelectionRange(intervalo[0], intervalo[1]);
+        return "selecionado";
+      });
     },
   };
 

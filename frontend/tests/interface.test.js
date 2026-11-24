@@ -44,13 +44,14 @@ test("há um código inicial que o usuário pode substituir", () => {
 });
 
 test("os scripts são carregados na ordem correta", () => {
-  const posicoes = ["js/logica.js", "js/controlador.js", "js/app.js"].map((s) => html.indexOf(s));
+  const posicoes = ["js/logica.js", "js/controlador.js", "js/ast.js", "js/resultados.js", "js/app.js"]
+    .map((s) => html.indexOf(s));
   assert.ok(posicoes.every((p) => p > -1), "script ausente");
   assert.deepEqual([...posicoes].sort((a, b) => a - b), posicoes);
 });
 
 test("todos os arquivos referenciados pelo HTML existem", () => {
-  for (const ref of ["style.css", "js/logica.js", "js/controlador.js", "js/app.js"]) {
+  for (const ref of ["style.css", "js/logica.js", "js/controlador.js", "js/ast.js", "js/resultados.js", "js/app.js"]) {
     assert.ok(fs.existsSync(path.join(raiz, ref)), `${ref} não existe`);
   }
 });

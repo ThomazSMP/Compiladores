@@ -40,7 +40,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .detalhes { font-size: .9rem; color: var(--suave); }
 .aviso-js { max-width: 1200px; margin: 1rem auto; padding: 0 1.5rem; color: var(--erro-borda); }
 .layout > *, .painel { min-width: 0; }
-.resultados--erro_lexico { border-color: var(--erro-borda); background: var(--erro-fundo); }
+.resultados--erro_lexico, .resultados--erro_sintatico { border-color: var(--erro-borda); background: var(--erro-fundo); }
 .resultados h3 { margin: 1rem 0 .4rem; font-size: 1rem; }
 .explicacao, .contagens { font-size: .85rem; overflow-wrap: anywhere; }
 .tabela-rolagem { overflow: auto; max-height: 440px; margin-top: .8rem; background: white; }
@@ -53,5 +53,16 @@ button:disabled { opacity: .6; cursor: wait; }
 .passos { display: flex; gap: .5rem; flex-wrap: wrap; margin: .6rem 0; }
 .passos button { min-height: 44px; padding: .45rem .85rem; }
 .passo-atual { font-size: .85rem; overflow-wrap: anywhere; }
-.erros-lexicos { padding-left: 1.25rem; overflow-wrap: anywhere; }
+.erros-lexicos, .erros-sintaticos { padding-left: 1.25rem; overflow-wrap: anywhere; }
+.estado-sintatico, .ast-posicao { font-size: .9rem; overflow-wrap: anywhere; }
+.ast-rolagem { max-height: 28rem; overflow: auto; margin-top: .7rem;
+                background: var(--painel); border: 1px solid var(--borda); border-radius: 6px; padding: .45rem; }
+.ast-lista { list-style: none; margin: 0; padding: 0; }
+.ast-filhos { border-left: 1px solid var(--borda); margin-left: .8rem; padding-left: .45rem; }
+.ast-linha { display: flex; min-width: 5rem; align-items: center; gap: .25rem; margin: .2rem 0; }
+.ast-linha button { color: var(--texto); background: var(--painel); border: 1px solid var(--borda);
+                    min-height: 2.75rem; padding: .35rem .55rem; font-size: .85rem; }
+.ast-linha button:hover, .ast-no[aria-pressed="true"] { background: var(--info-fundo); border-color: var(--info-borda); }
+.ast-no { min-width: 0; text-align: left; overflow-wrap: anywhere; }
+.ast-alternar { flex: 0 0 2.75rem; }
 @media (max-width: 480px) { .layout { padding: 0 .6rem; gap: .7rem; } .painel { padding: .8rem; } .topo { padding: 1rem; } }

@@ -10,18 +10,26 @@ const tokens = [
   { tipo: "LITERAL_INTEIRO", lexema: "10", linha: 1, coluna: 5 },
 ];
 class Elemento {
-  constructor(tag) { this.tagName = tag; this.children = []; this.events = {}; this.className = ""; this._text = ""; }
+  constructor(tag) {
+    this.tagName = tag;
+    this.children = [];
+    this.events = {};
+    this.attributes = {};
+    this.className = "";
+    this._text = "";
+  }
   set textContent(t) { this._text = String(t); this.children = []; }
   get textContent() { return this._text + this.children.map((c) => c.textContent).join(""); }
   appendChild(el) { this.children.push(el); return el; }
   addEventListener(name, fn) { this.events[name] = fn; }
+  setAttribute(name, value) { this.attributes[name] = value; }
   set innerHTML(_) { throw new Error("HTML de entrada nunca deve ser interpretado"); }
 }
 const documento = { createElement: (tag) => new Elemento(tag) };
 function buscar(el, tag) { return (el.tagName === tag ? [el] : []).concat(el.children.flatMap((c) => buscar(c, tag))); }
-function renderizar(dados) {
+function renderizar(dados, selecionarNo) {
   const area = new Elemento("div");
-  Resultados.mostrar(documento, area, dados);
+  Resultados.mostrar(documento, area, dados, selecionarNo);
   return area;
 }
 
@@ -77,4 +85,127 @@ test("controlador mantém código e encaminha tokens e erros ao renderizador", a
   assert.equal(resultado.tipo, "erro_lexico");
   assert.match(area.textContent, /Caractere @ inválido/);
   assert.equal(buscar(area, "tbody")[0].children.length, 3);
+});
+
+const codigoPrecedencia = "r = 10 + 5 * 2";
+const astPrecedencia = {
+  tipo: "Programa", corpo: [{
+    tipo: "Atribuicao",
+    alvo: { tipo: "Nome", identificador: "r" },
+    valor: { tipo: "Binaria", operador: "+",
+      esquerda: { tipo: "Numero", lexema: "10" },
+      direita: { tipo: "Binaria", operador: "*",
+        linha: 1, coluna: 10, linha_fim: 1, coluna_fim: 15,
+        esquerda: { tipo: "Numero", lexema: "5" },
+        direita: { tipo: "Numero", lexema: "2" } } },
+  }],
+};
+
+function respostaSintatica(estado, campos) {
+  return Logica.interpretarResposta(200, {
+    recebido: true, sucesso: true, estado_sintatico: estado, tokens, erros: [],
+    ast: null, erros_sintaticos: [], ...campos,
+  });
+}
+
+test("AST de precedência preserva a hierarquia, a seleção e a tabela de tokens", () => {
+  let trechoSelecionado;
+  const resultado = respostaSintatica("valido", { ast: astPrecedencia });
+  const area = renderizar(resultado, (no) => {
+    trechoSelecionado = codigoPrecedencia.slice(...Logica.intervaloNoCodigo(codigoPrecedencia, no));
+    return "selecionado";
+  });
+  const lista = buscar(area, "section")[0];
+  const multiplicacao = buscar(lista, "button").find((botao) => botao.textContent === "Direita · Operação binária *");
+  const soma = buscar(lista, "li").find((item) => item.children[0].textContent.includes("Valor · Operação binária +"));
+  assert.match(area.textContent, /Árvore sintática abstrata/);
+  assert.ok(multiplicacao);
+  assert.ok(buscar(soma, "button").includes(multiplicacao));
+  assert.equal(buscar(area, "tbody")[0].children.length, tokens.length);
+  multiplicacao.events.click();
+  assert.equal(trechoSelecionado, "5 * 2");
+  assert.equal(multiplicacao.attributes["aria-pressed"], "true");
+  assert.match(lista.textContent, /Linha 1, coluna 10 até linha 1, coluna 15/);
+});
+
+test("há raízes recolhidas ao iniciar árvores largas e os controles podem abrir tudo", () => {
+  const ast = { tipo: "Programa", corpo: Array.from({ length: 1000 }, () => ({
+    tipo: "Atribuicao", alvo: { tipo: "Nome", identificador: "x" }, valor: { tipo: "Numero", lexema: "7" },
+  })) };
+  const area = renderizar(respostaSintatica("valido", { ast }));
+  const lista = buscar(area, "section")[0];
+  const [expandir, recolher, raiz] = buscar(lista, "button");
+  const filhos = buscar(lista, "ul")[1];
+  assert.equal(raiz.attributes["aria-expanded"], "false");
+  assert.equal(filhos.children.length, 0);
+  expandir.events.click();
+  assert.equal(raiz.attributes["aria-expanded"], "true");
+  assert.equal(filhos.hidden, false);
+  assert.equal(filhos.children.length, 1000);
+  recolher.events.click();
+  assert.equal(filhos.hidden, true);
+  assert.equal(raiz.attributes["aria-expanded"], "false");
+});
+
+test("comentários produzem uma AST de programa vazio e mantêm o status léxico", () => {
+  const area = renderizar(respostaSintatica("valido", { ast: { tipo: "Programa", corpo: [] }, tokens: [] }));
+  assert.match(area.textContent, /Programa sem comandos/);
+  assert.match(area.textContent, /Nenhum token/);
+});
+
+test("AST de if/else distingue a condição e os comandos de cada ramo", () => {
+  function atribuicao(nome, lexema) {
+    return { tipo: "Atribuicao", alvo: { tipo: "Nome", identificador: nome }, valor: { tipo: "Numero", lexema } };
+  }
+  const ast = { tipo: "Programa", corpo: [{
+    tipo: "Se",
+    condicao: { tipo: "Comparacao", operador: ">", esquerda: { tipo: "Nome", identificador: "x" },
+      direita: { tipo: "Numero", lexema: "0" } },
+    entao: [atribuicao("x", "1")], senao: [atribuicao("x", "2")],
+  }] };
+  const area = renderizar(respostaSintatica("valido", { ast }));
+  const no = buscar(area, "li").find((item) => item.children[0].textContent.includes("Condicional if/else"));
+  const papeis = no.children[1].children.map((item) => buscar(item.children[0], "button").at(-1).textContent);
+  assert.deepEqual(papeis, ["Condição · Comparação >", "Então 1 · Atribuição", "Senão 1 · Atribuição"]);
+});
+
+test("erro sintático HTTP 200 preserva os tokens e exibe encontrado, esperado e posição", () => {
+  const resultado = respostaSintatica("invalido", {
+    erros_sintaticos: [{ linha: 1, coluna: 8, regra: "primaria",
+      mensagem: "Erro sintático na linha 1, coluna 8: feche a expressão com ')'. Encontrado: o fim do código (EOF).",
+      esperado: ")", encontrado: "EOF" }],
+  });
+  const area = renderizar(resultado);
+  assert.equal(resultado.tipo, "erro_sintatico");
+  assert.match(area.textContent, /Erros sintáticos/);
+  assert.match(area.textContent, /linha 1, coluna 8: feche a expressão/);
+  assert.match(area.textContent, /Encontrado: o fim do código \(EOF\)/);
+  assert.match(area.textContent, /Regra primaria · Esperado: \)/);
+  assert.equal(buscar(area, "tbody")[0].children.length, tokens.length);
+  assert.equal(buscar(area, "section").length, 0);
+});
+
+test("erro léxico deixa explícito que o parser foi ignorado", () => {
+  const resultado = respostaSintatica("nao_executado", {
+    sucesso: false, erros: [{ linha: 1, coluna: 5, mensagem: "Caractere @ inválido" }],
+  });
+  const area = renderizar(resultado);
+  assert.match(area.textContent, /Análise sintática não executada/);
+  assert.doesNotMatch(area.textContent, /Erros sintáticos/);
+  assert.equal(buscar(area, "section").length, 0);
+});
+
+test("selecionar nó após editar o código pede uma nova análise", () => {
+  const area = renderizar(respostaSintatica("valido", { ast: astPrecedencia }), () => "codigo_alterado");
+  const multiplicacao = buscar(area, "button").find((botao) => botao.textContent === "Direita · Operação binária *");
+  multiplicacao.events.click();
+  assert.match(area.textContent, /O código mudou. Analise novamente/);
+});
+
+test("intervalos de origem usam o fim exclusivo, mesmo após Unicode e CRLF", () => {
+  const codigo = "# ✨ 🧪\r\nx = (2\r\n     + 3)";
+  const posicao = { linha: 2, coluna: 5, linha_fim: 3, coluna_fim: 10 };
+  assert.equal(codigo.slice(...Logica.intervaloNoCodigo(codigo, posicao)), "(2\r\n     + 3)");
+  assert.equal(Logica.intervaloNoCodigo(codigo, { ...posicao, coluna: 99 }), null);
+  assert.deepEqual(Logica.intervaloNoCodigo("# 🧪x", { linha: 1, coluna: 4, linha_fim: 1, coluna_fim: 5 }), [4, 5]);
 });
