@@ -1,23 +1,23 @@
 # Software Educacional de Análise de Código
 
-Software educacional web para demonstrar as fases de **análise léxica, sintática e semântica** de uma linguagem de programação.
+Software educacional web que apresenta os **tokens, a árvore sintática abstrata (AST) e os diagnósticos** de um subconjunto de Python.
 
-> **Status da Etapa 3:** scanner do subconjunto de Python integrado ao backend e à interface. Os tokens e erros léxicos são apresentados com posição. A interface, os exemplos, a validação de entrada e a comunicação da Etapa 2 foram preservados.
-> **Ainda não implementado:** parser (Etapa 4) e análise semântica (Etapa 5). Sucesso léxico não significa que o programa seja sintaticamente correto. O código recebido não é executado.
+**Etapa 4 prática.** A análise usa o scanner da Etapa 3 e um parser descendente recursivo. Na interface, o estudante expande a árvore, seleciona nós para localizar trechos na fonte e compara a estrutura com a tabela de tokens. Análise semântica e tabela de símbolos são previstas para a Etapa 5.
 
-> **Etapa 4 acadêmica (18/11/2026):** proposta metodológica, gramática, arquitetura, fluxograma, protocolo e 40 casos de teste definidos em [`docs/etapa4`](docs/etapa4/trabalho-etapa4.md). A implementação do parser/AST permanece prevista; a estrutura inicial de testes marca os casos ainda indisponíveis como pendentes, sem simular aprovação.
+- [Gramática EBNF e exemplos](docs/etapa4-pratica/gramatica.md)
+- [Estratégia do parser, tipos de nó e contrato da API](docs/etapa4-pratica/parser-e-ast.md)
+- [Fluxograma da implementação](docs/etapa4-pratica/fluxograma.md)
+- [Roteiro de demonstração](docs/etapa4-pratica/demonstracao.md)
+- [Registro das verificações](docs/etapa4-pratica/registro-testes.md)
 
-### Materiais e Métodos - documentação da Etapa 4
+### Materiais e Métodos
 
-- [Texto do trabalho e matriz atualizada](docs/etapa4/trabalho-etapa4.md): sete fontes anteriores preservadas e duas novas.
-- [Fluxograma do estado atual e proposto](docs/etapa4/fluxograma.svg) e [arquitetura](docs/etapa4/arquitetura.svg).
-- [Gramática EBNF proposta](docs/etapa4/gramatica.ebnf) e [extensão do contrato](docs/etapa4/contrato-proposto.md).
-- [Protocolo pré-definido](docs/etapa4/protocolo-avaliacao.md), [casos e oráculos](docs/etapa4/casos-de-teste.md) e [dados canônicos](docs/etapa4/casos-de-teste.json).
-- [Formulário para futura avaliação por pares](docs/etapa4/formulario-pares.md) e [registro da verificação disponível](docs/etapa4/registro-verificacao.md).
+A [Etapa 4 acadêmica, de 18/11/2026](docs/etapa4/trabalho-etapa4.md), registra a proposta anterior à implementação, com matriz de nove estudos, gramática, contrato previsto, arquitetura e fluxograma. As [notas da implementação](docs/etapa4-pratica/metodo.md) complementam o texto com os recursos desta entrega.
 
-Os hashes da definição anterior aos testes estão em `docs/etapa4/congelamento-protocolo.json`. As novas verificações usam esse mesmo JSON localmente e no serviço Docker `backend-tests`, que monta `docs` somente para leitura. O registro de resultados é separado dos oráculos. O formulário ainda não foi aplicado.
+- [Protocolo predefinido](docs/etapa4/protocolo-avaliacao.md), [casos e oráculos](docs/etapa4/casos-de-teste.md) e [dados canônicos](docs/etapa4/casos-de-teste.json).
+- [Formulário para futura avaliação por pares](docs/etapa4/formulario-pares.md) e [verificação anterior ao parser](docs/etapa4/registro-verificacao.md).
 
-Os artigos completos acompanham o PDF de entrega acadêmica; este repositório contém suas referências e links oficiais. O arquivo do YARPGen possui permissão de cópia pessoal/em sala de aula e não é automaticamente republicado aqui.
+O [congelamento do protocolo](docs/etapa4/congelamento-protocolo.json) identifica por hash as definições anteriores aos testes. O serviço Docker `backend-tests` monta `docs` para ler os casos canônicos. Os resultados ficam em um registro separado. Os artigos completos acompanham o PDF acadêmico. As referências e seus links oficiais estão no texto da proposta.
 
 ## 1. Objetivo
 
@@ -29,19 +29,19 @@ Ajudar estudantes de graduação a compreender como um compilador processa um pr
 
 - Sintaxe enxuta e legível, o que facilita explicar os resultados para quem está aprendendo.
 - A indentação como delimitador de bloco é um bom caso de estudo para a análise léxica (tokens `INDENT`/`DEDENT`).
-- O backend em Python permite implementar e testar o scanner sem acrescentar dependências. A linguagem analisada e a linguagem de implementação são decisões diferentes.
+- O backend em Python permite implementar e testar scanner e parser sem acrescentar dependências específicas de análise. A linguagem analisada e a linguagem de implementação são decisões diferentes.
 
-**Subconjunto previsto:**
+**Construções aceitas pelo parser**
 
 | Construção | Exemplo |
 |---|---|
-| Atribuição / declaração implícita de variáveis | `x = 10` |
+| Atribuição a um nome | `x = 10` |
 | Literais inteiros e de ponto flutuante | `3`, `2.5` |
 | Operadores aritméticos | `+  -  *  /` e parênteses |
 | Operadores relacionais | `==  !=  <  >  <=  >=` |
-| Estrutura condicional | `if / else` |
+| Condicional com blocos não vazios e ramo alternativo opcional | `if / else` |
 
-Ficam **fora** do escopo inicial: funções, classes, laços, listas, strings, importações etc.
+O escopo sintático detalha construções aceitas, precedência, limites e correspondência entre gramática e scanner. [Gramática formal](docs/etapa4-pratica/gramatica.md)
 
 ### Subconjunto léxico implementado
 
@@ -79,6 +79,7 @@ Compiladores/
 │   ├── app/
 │   │   ├── main.py          # rotas, contrato HTTP e tratamento de erros
 │   │   ├── scanner.py       # tokenização e erros léxicos recuperáveis
+│   │   ├── parser.py        # gramática, AST e diagnóstico sintático
 │   │   ├── validacao.py     # regras de validação da entrada (sem dependências)
 │   │   └── exemplos.py      # programas de exemplo
 │   ├── tests/               # testes unitários e de endpoints
@@ -91,6 +92,8 @@ Compiladores/
 │   ├── js/
 │   │   ├── logica.js        # validação, montagem da requisição e leitura da resposta
 │   │   ├── controlador.js   # fluxo da tela (exemplos, envio, mensagens)
+│   │   ├── resultados.js    # apresentação de tokens e diagnósticos
+│   │   ├── ast.js           # árvore navegável e posições na fonte
 │   │   └── app.js           # ligação com o DOM
 │   ├── tests/               # testes da lógica, do controlador e da interface
 │   ├── nginx.conf           # servidor estático + proxy de /api/* para o backend
@@ -98,7 +101,7 @@ Compiladores/
 ├── scripts/
 │   ├── testar.sh            # roda os testes do backend e do frontend no Docker
 │   └── smoke_test.sh        # teste de implantação e integração (aplicação no ar)
-├── docs/                   # escopo léxico, testes e roteiro de demonstração
+├── docs/                   # escopo, testes, proposta e documentação da Etapa 4
 ├── docker-compose.yml
 └── README.md
 ```
@@ -142,9 +145,9 @@ A tela tem duas áreas:
    - **Carregar um exemplo:** a lista de exemplos fica no topo. Ao escolher um, o código **substitui** o conteúdo da área de edição e pode ser modificado antes da análise. Para restaurar um exemplo, escolha-o de novo.
    - **Área de edição:** campo de texto em fonte monoespaçada. Já abre com um código inicial (`x = 10`) que pode ser apagado ou substituído. O conteúdo é preservado depois de cada análise.
    - **Analisar código:** envia o código ao backend (atalho: `Ctrl + Enter`, ou `⌘ + Enter` no Mac).
-2. **Resultados** (direita): apresenta o resumo da entrada, os tokens identificados (categoria, lexema, linha e coluna) e os erros léxicos. As mensagens de entrada inválida e falha de comunicação continuam disponíveis.
+2. **Resultados** (direita) — apresenta resumo, tokens com posições, erros léxicos e o resultado da análise sintática. Se a sintaxe for aceita, a seção **Árvore sintática abstrata (AST)** permite expandir ou recolher ramos e selecionar um nó para localizar seu trecho no editor. Se o parser encontrar um problema, a interface mostra o primeiro diagnóstico com sua localização.
 
-O sistema **não presume que o código é válido**: `x = 10 +`, por exemplo, possui tokens reconhecíveis e deve ser tokenizado sem exigir um operando. Detectar essa estrutura incompleta é responsabilidade do parser da Etapa 4.
+Para `x = 10 +`, a tabela inclui todos os tokens reconhecidos. Na seção sintática, o diagnóstico indica a falta de um operando após `+`. Para `x = @ 2`, a interface mostra o erro léxico e informa que o parser não foi executado. [Demonstração guiada](docs/etapa4-pratica/demonstracao.md)
 
 ### Exemplos disponíveis
 
@@ -153,7 +156,8 @@ O sistema **não presume que o código é válido**: `x = 10 +`, por exemplo, po
 | Atribuição de variáveis | `x = 10`<br>`y = 2.5` | Identificadores, operador `=` e literais inteiros e de ponto flutuante |
 | Operações aritméticas | `a = 10`<br>`b = 5`<br>`resultado = (a + b) * 2 - 3 / 1` | Operadores `+ - * /`, parênteses e precedência |
 | Estrutura condicional | `numero = 10`<br>`if numero > 0:`<br>`    numero = numero + 1`<br>`else:`<br>`    numero = 0` | `if/else`, operador relacional, `:` e blocos por indentação (`INDENT`/`DEDENT`) |
-| Código com erro intencional | `x = 10 +`<br>`if x > :`<br>`    y = = 2` | Erros sintáticos: o scanner reconhece os tokens e não deve se passar por parser |
+| Código com erro intencional | `x = 10 +`<br>`if x > :`<br>`    y = = 2` | O scanner reconhece os tokens e o parser apresenta o primeiro erro sintático |
+| Erros léxicos com recuperação | `x = 10 @`<br>`y = 12abc`<br>`resultado = x + 2 $` | O scanner registra os erros e os demais tokens reconhecidos |
 
 Os exemplos ficam no backend (`backend/app/exemplos.py`) e são entregues pelo endpoint `GET /api/exemplos`.
 
@@ -169,37 +173,15 @@ Requisição:
 { "codigo": "x = 10" }
 ```
 
-Resposta de análise (`200`): mantém os campos da Etapa 2 e acrescenta `sucesso`, `tokens` e `erros`. Exemplo para `x = 10`, sem quebra de linha final:
+Para requisições processadas com HTTP 200, os campos `recebido`, `mensagem`, `resumo`, `sucesso`, `tokens` e `erros` preservam o contrato anterior. `sucesso` e `erros` descrevem a fase léxica. Os campos novos descrevem a fase sintática.
 
-```json
-{
-  "recebido": true,
-  "mensagem": "Código recebido com sucesso.",
-  "resumo": { "linhas": 1, "caracteres": 6 },
-  "sucesso": true,
-  "tokens": [
-    { "tipo": "IDENTIFICADOR", "lexema": "x", "linha": 1, "coluna": 1 },
-    { "tipo": "OPERADOR", "lexema": "=", "linha": 1, "coluna": 3 },
-    { "tipo": "LITERAL_INTEIRO", "lexema": "10", "linha": 1, "coluna": 5 },
-    { "tipo": "NEWLINE", "lexema": "", "linha": 1, "coluna": 7 }
-  ],
-  "erros": []
-}
-```
+| `estado_sintatico` | Quando | `ast` | `erros_sintaticos` |
+|---|---|---|---|
+| `valido` | Sintaxe aceita | Objeto `Programa` | `[]` |
+| `invalido` | Sintaxe recusada ou limite da análise atingido | `null` | Primeiro diagnóstico |
+| `nao_executado` | Pelo menos um erro léxico | `null` | `[]` |
 
-Erros léxicos também retornam HTTP `200`: a requisição foi processada, mas `sucesso` é `false`. O campo `recebido` permanece `true`, pois o backend recebeu uma entrada analisável. A lista `tokens` pode conter os tokens válidos encontrados antes e depois do erro.
-
-```json
-{
-  "tipo": "ERRO_LEXICO",
-  "lexema": "@",
-  "linha": 1,
-  "coluna": 5,
-  "mensagem": "Caractere não reconhecido: '@'."
-}
-```
-
-Esse é o formato de um item de `erros`; a redação completa inclui orientação sobre o subconjunto. Tokens são unidades classificadas; **lexema** é o trecho literal do código associado à unidade.
+As posições são numeradas a partir de 1. Os nós da AST têm posição inicial e final exclusiva. O parser recebe os mesmos tokens da resposta e acrescenta apenas um marcador interno de fim de entrada. [Contrato completo e exemplos de JSON](docs/etapa4-pratica/parser-e-ast.md)
 
 Respostas de erro (mesmo formato para todos):
 
@@ -240,16 +222,18 @@ A documentação interativa do FastAPI fica em **http://localhost:8080/api/docs*
 
 O backend valida a entrada independentemente do frontend. Nenhuma mensagem expõe caminhos internos, rastreamentos de exceção ou variáveis de ambiente.
 
-A mensagem histórica `Código recebido com sucesso.` confirma somente o recebimento. A situação léxica deve ser lida no campo `sucesso` e na lista `erros`; a interface apresenta esses resultados separadamente.
+A mensagem `Código recebido com sucesso.` confirma o recebimento. Consulte `sucesso` e `erros` para o léxico, e `estado_sintatico` e `erros_sintaticos` para a sintaxe. O diagnóstico sintático informa posição, regra, elemento esperado e elemento encontrado.
 
 ## 11. Testes automatizados
 
 | Tipo | Onde | Ferramenta |
 |---|---|---|
-| Unitários (scanner, validação, exemplos) | `backend/tests/` | pytest / unittest |
-| Endpoints e contrato HTTP | `backend/tests/test_api.py` | pytest + TestClient |
+| Unitários (scanner, parser, validação e exemplos) | `backend/tests/` | pytest / unittest |
+| Endpoints e contrato HTTP | `backend/tests/test_api.py` e `backend/tests/test_api_sintaxe.py` | pytest + TestClient |
 | Unitários e de interface (lógica, controlador, HTML/CSS) | `frontend/tests/` | `node --test` |
-| Implantação e integração (Nginx → backend, ponta a ponta via HTTP) | `scripts/smoke_test.sh` | bash + curl |
+| Implantação e integração (Nginx → backend via HTTP) | `scripts/smoke_test.sh` | bash + curl |
+| Navegador (tokens, AST, seleção, erros e tela de 390 px) | `scripts/teste_navegador_etapa4.cjs` | Playwright + Chromium |
+| Comparação estrutural com a AST do Python | `scripts/comparar_ast_python.py` | `ast.parse` + cliente HTTP da biblioteca padrão |
 | Regressão | Todos os anteriores, reexecutados a cada alteração (inclui `GET /api/hello` da etapa 1) | — |
 
 **Rodar os testes de backend e frontend (dentro do Docker, sem precisar da aplicação no ar):**
@@ -274,9 +258,9 @@ bash scripts/smoke_test.sh
 docker compose down
 ```
 
-Os resultados anteriores permanecem em [`docs/testes.md`](docs/testes.md). O registro da implementação atual fica em [`docs/testes-etapa3.md`](docs/testes-etapa3.md). Só considere validado o procedimento que tenha uma execução registrada; configuração de Docker não comprova, sozinha, que os contêineres tenham subido.
+O [registro da Etapa 4](docs/etapa4-pratica/registro-testes.md) descreve as execuções e pendências atuais. Os históricos das etapas anteriores continuam disponíveis. [Etapa 2](docs/testes.md) · [Etapa 3](docs/testes-etapa3.md)
 
-Para rodar fora do Docker:
+Para rodar fora do Docker, a partir da raiz do projeto:
 
 ```bash
 cd backend
@@ -290,54 +274,38 @@ node --test 'tests/*.test.js'
 
 ## 12. Validação de instalação limpa
 
-Roteiro para simular uma máquina que nunca viu o projeto:
+Extraia o pacote em uma pasta nova. Entre em `Compiladores` e use um nome Compose exclusivo para o ensaio. O exemplo usa a porta 8083.
 
 ```bash
-# 1. Extrair esta entrega em uma pasta nova e entrar na pasta Compiladores
-cd Compiladores
-
-# 2. Garantir que não há resíduos de execuções anteriores
-docker compose down --rmi local -v
-
-# 3. Subir do zero, sem cache
+export COMPOSE_PROJECT_NAME=compiladores-validacao-etapa4
+export PORTA_WEB=8083
+docker compose config --quiet
 docker compose build --no-cache
 docker compose up -d
-
-# 4. Verificar
-docker compose ps                  # os dois serviços devem estar "Up"
-bash scripts/smoke_test.sh         # todas as verificações devem passar
-# abrir http://localhost:8080, escolher um exemplo e clicar em "Analisar código"
-
-# 5. Testes automatizados
+docker compose ps
 bash scripts/testar.sh
-
-# 6. Encerrar
-docker compose down
+BASE_URL=http://localhost:8083 bash scripts/smoke_test.sh
 ```
 
-As execuções reais e pendências são registradas em `docs/testes-etapa3.md`. Não há resultado presumido para um ambiente limpo.
+Abra `http://localhost:8083` e execute os exemplos válidos e inválidos do [roteiro](docs/etapa4-pratica/demonstracao.md). Ao terminar, execute `docker compose down` e encerre o terminal usado para o ensaio.
 
 ## 13. Solução de problemas
 
-- **Porta 8080 ocupada:** execute `PORTA_WEB=8083 docker compose up --build -d` e acesse `http://localhost:8083`. Para o smoke test: `BASE_URL=http://localhost:8083 bash scripts/smoke_test.sh`. O projeto Compose tem nome `compiladores-etapa3` e usa nomes automáticos de contêineres para coexistir com a etapa anterior.
-- **Erro "container name already in use":** há contêineres de uma execução anterior. Rode `docker compose down` na pasta antiga ou `docker rm -f edu-backend edu-frontend`.
+- **Porta 8080 ocupada:** execute `PORTA_WEB=8083 docker compose up --build -d` e acesse `http://localhost:8083`. Para o smoke test: `BASE_URL=http://localhost:8083 bash scripts/smoke_test.sh`. O nome padrão do projeto Compose continua sendo `compiladores-etapa3`. Para rodar duas cópias em paralelo, use nomes de projeto e portas diferentes.
 - **Interface mostra "Não foi possível comunicar com o servidor":** veja os logs com `docker compose logs backend` e confirme que `docker compose ps` mostra o backend como `healthy`.
 - **Lista de exemplos indisponível:** é o mesmo problema de comunicação com o backend. A área de código continua utilizável.
 
 ## 14. Limitações conhecidas
 
-- **Não há análise sintática nem semântica.** Um resultado léxico bem-sucedido apenas confirma o reconhecimento das unidades do subconjunto.
-- Python completo não é suportado: strings, laços, funções, classes, importações e outras construções não são parte desta entrega.
-- O limite de tamanho da entrada é de 10.000 caracteres.
-- Os testes de interface verificam a estrutura (HTML/CSS) e a lógica do controlador, mas **não há teste automatizado que abra um navegador real**.
-- Não há banco de dados.
+- A gramática cobre um subconjunto de Python. Funções, laços, strings, operadores lógicos e comparações encadeadas ficam fora dele.
+- A análise sintática apresenta o primeiro diagnóstico por execução.
+- A aplicação limita a entrada a 10.000 caracteres e controla a profundidade de aninhamento e da AST. [Limites e diagnósticos](docs/etapa4-pratica/parser-e-ast.md)
+- A árvore permite explorar a estrutura já reconhecida. A execução do programa e a animação da construção da árvore estão fora desta etapa.
 
-## 15. Próximas etapas
+## 15. Próxima etapa
 
-Na Etapa 4 será implementado o parser, aproveitando os tokens do scanner; a Etapa 5 tratará a semântica. Tutorial inicial e demonstração: [`docs/demonstracao-etapa3.md`](docs/demonstracao-etapa3.md).
+A Etapa 5 partirá da AST para tratar análise semântica e tabela de símbolos. A proposta acadêmica mantém prevista a avaliação por pares. [Método de avaliação](docs/etapa4/protocolo-avaliacao.md)
 
-## 16. Entrega e GitHub
+## 16. Entrega
 
-A versão entregue no ZIP amplia o código da Etapa 2. O repositório indicado na documentação anterior era `https://github.com/ThomazSMP/Compiladores.git`; essa indicação não significa que tenha ocorrido publicação desta entrega. Para atualizar o repositório, copie os arquivos para o checkout, revise as alterações, execute os testes e registre um commit descritivo, por exemplo `Implementa scanner do subconjunto Python e exibição de tokens`. Não envie credenciais ou arquivos `.venv`.
-
-A documentação e a navegação didática são decisões fundamentadas no objetivo educacional; não se afirma que sejam inéditas frente às ferramentas pesquisadas.
+O pacote da Etapa 4 inclui a aplicação, os testes e esta documentação. O [repositório oficial](https://github.com/ThomazSMP/Compiladores) conserva o histórico das etapas.
