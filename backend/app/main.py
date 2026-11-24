@@ -1,7 +1,4 @@
-"""API do software educacional.
-
-Etapa 3: valida a entrada e executa o scanner. Parser e semântica são futuros.
-"""
+"""API do software educacional. Valida a entrada, executa o scanner e o parser."""
 import logging
 
 from fastapi import FastAPI, Request
@@ -9,7 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, StrictStr
 
-from . import exemplos, validacao, scanner
+from . import exemplos, parser, scanner, validacao
 
 logger = logging.getLogger("app")
 
@@ -60,9 +57,15 @@ def analisar(requisicao: RequisicaoAnalise):
     erro = validacao.validar_codigo(requisicao.codigo)
     if erro is not None:
         return resposta_erro(erro.status, erro.tipo, erro.mensagem)
+    lexico = scanner.analisar(requisicao.codigo)
+    if lexico["sucesso"]:
+        sintatico = parser.analisar(lexico["tokens"], requisicao.codigo)
+    else:
+        sintatico = {"estado_sintatico": "nao_executado", "ast": None, "erros_sintaticos": []}
     return {
         "recebido": True,
         "mensagem": validacao.MSG_SUCESSO,
         "resumo": validacao.resumir(requisicao.codigo),
-        **scanner.analisar(requisicao.codigo),
+        **lexico,
+        **sintatico,
     }

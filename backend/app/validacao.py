@@ -34,5 +34,5 @@ def validar_codigo(codigo) -> Optional[ErroValidacao]:
 
 
 def resumir(codigo: str) -> dict:
-    """Resumo simples do código recebido (as análises de verdade virão nas próximas etapas)."""
+    """Resume a extensão do código-fonte recebido."""
     return {"linhas": len(codigo.splitlines()), "caracteres": len(codigo)}

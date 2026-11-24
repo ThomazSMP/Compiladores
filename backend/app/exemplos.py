@@ -10,7 +10,7 @@ EXEMPLOS = [
     {
         "id": "atribuicao",
         "titulo": "Atribuição de variáveis",
-        "descricao": "Declaração implícita de variáveis com literais inteiros e de ponto flutuante.",
+        "descricao": "Atribuições com literais inteiros e de ponto flutuante.",
         "codigo": "x = 10\ny = 2.5\n",
     },
     {
@@ -28,7 +28,7 @@ EXEMPLOS = [
     {
         "id": "erro-intencional",
         "titulo": "Código com erro intencional",
-        "descricao": "Programa com erros de propósito, para as etapas em que os analisadores identificarão problemas.",
+        "descricao": "O scanner identifica os tokens. O parser aponta o primeiro erro sintático, que ocorre após '+'.",
         "codigo": "x = 10 +\nif x > :\n    y = = 2\n",
     },
 ]
